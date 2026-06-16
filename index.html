@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tesina di Terza Media - Economia</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #1f2933;
+      background:
+        linear-gradient(rgba(15, 23, 42, 0.34), rgba(15, 23, 42, 0.34)),
+        url("immagini/sfondo/wall-street.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      line-height: 1.6;
+    }
+
+    main {
+      min-height: 100vh;
+      background: rgba(245, 247, 250, 0.88);
+    }
+
+    .sezione {
+      max-width: 1100px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 64px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 32px;
+      color: #0b1f3a;
+      text-align: center;
+    }
+
+    .sezione>p {
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .azioni-sezione {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .bottone-sezione {
+      padding: 12px 18px;
+      border-radius: 8px;
+      color: white;
+      background: #0b1f3a;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .bottone-sezione:hover {
+      background: #12345a;
+    }
+
+    .mappa-concettuale {
+      min-height: 640px;
+      position: relative;
+      border: 1px solid #dbe3ea;
+      border-radius: 8px;
+      background: white;
+      overflow: hidden;
+    }
+
+    .frecce-mappa {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .frecce-mappa line {
+      stroke: #94a3b8;
+      stroke-width: 3;
+      marker-end: url(#punta-freccia);
+    }
+
+    .frecce-mappa path {
+      fill: #94a3b8;
+    }
+
+    .nodo-mappa {
+      width: 150px;
+      min-height: 58px;
+      padding: 12px;
+      position: absolute;
+      border: 2px solid #bfdbfe;
+      border-radius: 8px;
+      background: #eaf2ff;
+      color: #0b1f3a;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      transform: translate(-50%, -50%);
+    }
+
+    .nodo-mappa:hover {
+      border-color: #0b1f3a;
+      color: #0b1f3a;
+      background: #dbeafe;
+    }
+
+    .nodo-centro {
+      width: 180px;
+      min-height: 82px;
+      left: 50%;
+      top: 50%;
+      border-color: #0b1f3a;
+      background: #0b1f3a;
+      color: white;
+      font-size: 24px;
+    }
+
+    .nodo-centro:hover {
+      border-color: #0b1f3a;
+      background: #0b1f3a;
+      color: white;
+    }
+
+    .nodo-1 {
+      left: 18%;
+      top: 11%;
+    }
+
+    .nodo-2 {
+      left: 38%;
+      top: 11%;
+    }
+
+    .nodo-3 {
+      left: 62%;
+      top: 11%;
+    }
+
+    .nodo-4 {
+      left: 82%;
+      top: 11%;
+    }
+
+    .nodo-5 {
+      left: 8%;
+      top: 36%;
+    }
+
+    .nodo-6 {
+      left: 92%;
+      top: 36%;
+    }
+
+    .nodo-7 {
+      left: 8%;
+      top: 64%;
+    }
+
+    .nodo-8 {
+      left: 92%;
+      top: 64%;
+    }
+
+    .nodo-9 {
+      left: 18%;
+      top: 89%;
+    }
+
+    .nodo-10 {
+      left: 38%;
+      top: 89%;
+    }
+
+    .nodo-11 {
+      left: 62%;
+      top: 89%;
+    }
+
+    .nodo-12 {
+      left: 82%;
+      top: 89%;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      padding: 28px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal:target {
+      display: flex;
+    }
+
+    .modal-sfondo {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.72);
+    }
+
+    .modal-box {
+      width: min(720px, 100%);
+      max-height: calc(100vh - 56px);
+      padding: 34px;
+      position: relative;
+      z-index: 1;
+      overflow: auto;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+    }
+
+    .modal-box-larga {
+      width: min(900px, 100%);
+    }
+
+    .contenuto-con-immagine {
+      display: grid;
+      grid-template-columns: minmax(180px, 32%) 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .immagine-testo {
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #dbe3ea;
+    }
+
+    .immagine-verticale {
+      aspect-ratio: 4 / 5;
+    }
+
+    .immagine-orizzontale {
+      aspect-ratio: 16 / 9;
+    }
+
+    .immagine-quadrata {
+      aspect-ratio: 1 / 1;
+    }
+
+    .chiudi-modal {
+      width: 38px;
+      height: 38px;
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      border-radius: 50%;
+      color: white;
+      background: #0b1f3a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 26px;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .chiudi-modal:hover {
+      background: #12345a;
+    }
+
+    .etichetta-modal {
+      margin: 0 48px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #dbe3ea;
+      color: #0b1f3a;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .modal-box p {
+      margin: 0;
+    }
+
+    .modal-box p+p {
+      margin-top: 14px;
+    }
+
+    .modal-box .etichetta-modal+p,
+    .modal-box .etichetta-modal+.contenuto-con-immagine {
+      margin-top: 34px;
+    }
+
+    @media (max-width: 800px) {
+      .mappa-concettuale {
+        min-height: auto;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .frecce-mappa {
+        display: none;
+      }
+
+      .nodo-mappa {
+        width: 100%;
+        min-height: 54px;
+        position: static;
+        transform: none;
+      }
+
+      .nodo-mappa:not(.nodo-centro)::before {
+        content: "→";
+        margin-right: 10px;
+        color: #0b1f3a;
+      }
+
+      .nodo-centro {
+        font-size: 22px;
+        order: -1;
+      }
+
+      .modal {
+        padding: 16px;
+      }
+
+      .modal-box {
+        padding: 28px 22px;
+      }
+
+      .contenuto-con-immagine {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .immagine-testo {
+        aspect-ratio: 16 / 9;
+        max-height: 240px;
+      }
+
+      .etichetta-modal {
+        margin-right: 44px;
+        margin-left: 44px;
+      }
+
+      .sezione {
+        min-height: auto;
+        padding: 48px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <section id="introduzione" class="sezione">
+      <h2>Introduzione</h2>
+      <p>
+        Ho scelto di incentrare la mia tesina sull'economia perché è un tema che
+        mi interessa molto e che sento vicino al mio futuro. È un argomento molto
+        attuale: tutto ciò che succede nel mondo economico influenza la nostra
+        vita quotidiana, dal lavoro ai consumi, dal risparmio alle scelte che
+        facciamo ogni giorno.
+      </p>
+      <p>
+        Studiare l'economia mi ha permesso di capire che non si tratta solo di
+        numeri o denaro, ma anche di persone, società, ambiente, diritti e
+        cambiamenti storici. Con questa mappa concettuale voglio mostrare i
+        collegamenti che ho scelto con le diverse materie.
+      </p>
+      <div class="azioni-sezione">
+        <a class="bottone-sezione" href="#mappa">Vai alla mappa concettuale</a>
+      </div>
+    </section>
+
+    <section id="mappa" class="sezione">
+      <h2>Mappa dei collegamenti</h2>
+      <div class="mappa-concettuale">
+        <svg class="frecce-mappa" viewBox="0 0 1000 640" aria-hidden="true">
+          <defs>
+            <marker id="punta-freccia" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+          </defs>
+          <line x1="500" y1="320" x2="180" y2="70"></line>
+          <line x1="500" y1="320" x2="380" y2="70"></line>
+          <line x1="500" y1="320" x2="620" y2="70"></line>
+          <line x1="500" y1="320" x2="820" y2="70"></line>
+          <line x1="500" y1="320" x2="80" y2="230"></line>
+          <line x1="500" y1="320" x2="920" y2="230"></line>
+          <line x1="500" y1="320" x2="80" y2="410"></line>
+          <line x1="500" y1="320" x2="920" y2="410"></line>
+          <line x1="500" y1="320" x2="180" y2="570"></line>
+          <line x1="500" y1="320" x2="380" y2="570"></line>
+          <line x1="500" y1="320" x2="620" y2="570"></line>
+          <line x1="500" y1="320" x2="820" y2="570"></line>
+        </svg>
+
+        <div class="nodo-mappa nodo-centro">Economia</div>
+        <a class="nodo-mappa nodo-1" href="#modal-storia">Storia</a>
+        <a class="nodo-mappa nodo-2" href="#modal-geografia">Geografia</a>
+        <a class="nodo-mappa nodo-3" href="#modal-italiano">Italiano</a>
+        <a class="nodo-mappa nodo-4" href="#modal-scienze">Scienze</a>
+        <a class="nodo-mappa nodo-5" href="#modal-inglese">Inglese</a>
+        <a class="nodo-mappa nodo-6" href="#modal-spagnolo">Spagnolo</a>
+        <a class="nodo-mappa nodo-7" href="#modal-tecnologia">Tecnologia</a>
+        <a class="nodo-mappa nodo-8" href="#modal-arte">Arte</a>
+        <a class="nodo-mappa nodo-9" href="#modal-educazione-fisica">Educazione fisica</a>
+        <a class="nodo-mappa nodo-10" href="#modal-educazione-civica">Educazione civica</a>
+        <a class="nodo-mappa nodo-11" href="#modal-latino">Latino</a>
+        <a class="nodo-mappa nodo-12" href="#modal-religione">Religione</a>
+      </div>
+      <div class="azioni-sezione">
+        <a class="bottone-sezione" href="#conclusione">Vai alla conclusione</a>
+      </div>
+    </section>
+
+    <div id="modal-storia" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Storia - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Storia - Collegamento con Economia</p>
+        <div class="contenuto-con-immagine">
+          <img class="immagine-testo immagine-orizzontale" src="immagini/storia/crollo-wall-street-1929.png"
+            alt="Persone preoccupate davanti alla Borsa di Wall Street nel 1929">
+          <div>
+            <p>Dopo la Prima Guerra Mondiale, gli Stati Uniti divennero la più grande potenza economica mondiale, vivendo negli anni '20 un periodo di enorme ricchezza e ottimismo (i "Ruggenti Anni Venti"). In questa atmosfera di benessere, tantissimi cittadini iniziarono a investire i propri risparmi nella borsa di Wall Street.
+
+Tuttavia, nel 1929 l'economia entrò in una crisi di sovrapproduzione: le industrie producevano più merci di quante la gente potesse comprarne. Il panico che ne seguì portò al crollo della borsa di Wall Street il 24 ottobre 1929 ("Giovedì Nero"). Questo disastro finanziario diede inizio alla Grande Depressione: le banche fallirono, le fabbriche chiusero e milioni di americani rimasero disoccupati.
+
+La ripresa arrivò nel 1932 con l'elezione del presidente Franklin D. Roosevelt, che lanciò il New Deal ("Nuovo Corso"). Con questo piano, lo Stato intervenne direttamente nell'economia finanziando grandi lavori pubblici per dare lavoro ai disoccupati, introducendo controlli sulle banche e creando riforme sociali per proteggere i cittadini, riuscendo così a risanare il Paese.
+              
+            </p>
+            <p>
+              <img class="immagine-testo immagine-orizzontale" src="immagini/storia/crush.png"
+                alt="Crollo della Borsa di Wall Street">
+			</p>
+			<p>
+              <img class="immagine-testo immagine-orizzontale" src="immagini/storia/ros.png" alt="Roosevelt">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-geografia" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Geografia - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Geografia - Collegamento con Economia</p>
+        <div class="contenuto-con-immagine">
+          <img class="immagine-testo immagine-orizzontale" src="immagini/storia/oipcar.png" alt="Mappa degli Stati Uniti">
+          <div>
+            <p>Gli Stati Uniti d'America (USA) sono una repubblica federale composta da 50 Stati. È un Paese immenso, il quarto più grande al mondo, ed è bagnato dall'Oceano Atlantico a est e dall'Oceano Pacifico a ovest. Questa posizione geografica è stata fondamentale per l'economia: i due oceani hanno protetto l'America dai conflitti mondiali e le hanno permesso di commerciare facilmente con l'Europa e con l'Asia. Inoltre, il territorio è ricchissimo di risorse naturali, come grandi fiumi navigabili (il Mississippi), enormi pianure fertili e sottosuoli pieni di petrolio, carbone e ferro, che hanno favorito la nascita delle industrie.</p>
+            <p><img class="immagine-testo immagine-orizzontale" src="immagini/storia/bandieraamericana.png" alt="Bandiera degli Stati Uniti"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-italiano" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Italiano - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Italiano - Collegamento con Economia</p>
+        <div class="contenuto-con-immagine">
+          <img class="immagine-testo immagine-verticale"
+            src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
+            alt="Libro aperto con appunti su un tavolo">
+          <div>
+            <p>
+              In italiano posso collegarmi al tema del lavoro nella letteratura.
+              Per esempio, nel Verismo vengono raccontate le difficoltà delle
+              persone povere e dei lavoratori.
+            </p>
+            <p>
+              Questo mostra che l'economia non riguarda solo il denaro, ma anche
+              le condizioni di vita, le disuguaglianze e la dignità delle persone.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-scienze" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box" role="dialog" aria-label="Scienze - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Scienze - Collegamento con Economia</p>
+        <p>
+          In scienze posso parlare del rapporto tra economia e ambiente. Le
+          attività economiche usano risorse naturali come acqua, suolo, energia
+          e materie prime.
+        </p>
+        <p>
+          Per questo è importante lo sviluppo sostenibile, cioè produrre e
+          consumare senza rovinare l'ambiente per le generazioni future.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal-inglese" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box" role="dialog" aria-label="Inglese - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Inglese - Collegamento con Economia</p>
+        <p>
+          In English I can talk about global trade, which is the exchange of
+          goods and services between different countries.
+        </p>
+        <p>
+          This topic is connected to economy because countries buy and sell
+          products, creating jobs, transport systems and international markets.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal-spagnolo" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box" role="dialog" aria-label="Spagnolo - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Spagnolo - Collegamento con Economia</p>
+        <p>
+          En español puedo hablar del turismo y del comercio. El turismo es
+          importante para la economía porque crea trabajo en hoteles,
+          restaurantes, museos, transportes y tiendas.
+        </p>
+        <p>
+          Este tema también permite hablar de los productos típicos y de los
+          intercambios entre culturas diferentes.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal-tecnologia" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box" role="dialog" aria-label="Tecnologia - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Tecnologia - Collegamento con Economia</p>
+        <p>
+          In tecnologia collego l'economia alla produzione industriale. Le
+          aziende trasformano materie prime in prodotti usando macchinari,
+          energia e lavoro umano.
+        </p>
+        <p>
+          Oggi la tecnologia rende la produzione più veloce, ma cambia anche
+          il mondo del lavoro e richiede nuove competenze.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal-arte" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Arte - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Arte - Collegamento con Economia</p>
+        <div class="contenuto-con-immagine">
+          <img class="immagine-testo immagine-orizzontale" src="immagini/storia/tanofestapersiane.png" alt="Opera di Tano Festa">
+          <div>
+            <p>In arte ho scelto la Pop Art in Italia, generalmente americana o inglese, e l'impatto con l'economia. Negli anni Sessanta, l'Italia visse il suo "miracolo economico", un periodo di forte industrializzazione che trasformò il Paese in una società del benessere e dei consumi di massa. In questo clima di cambiamento arrivò dagli Stati Uniti la Pop Art, che gli artisti italiani rielaborarono legandola alla nostra tradizione culturale. Questo movimento influenzò profondamente l'economia e ne fu, al tempo stesso, lo specchio. Artisti come Mario Schifano portarono nelle loro opere i nuovi simboli del boom, come i loghi pubblicitari della Coca-Cola o della Esso, trasformando i prodotti commerciali in arte. Questa tendenza modificò radicalmente il mercato artistico, poiché le opere iniziarono a essere prodotte più rapidamente, con materiali industriali ed economici, diventando esse stesse beni di consumo accessibili a un pubblico più ampio. Si creò così un legame strettissimo tra arte e industria: se da un lato i pittori si ispiravano ai prodotti dei supermercati, dall'altro le grandi aziende italiane di moda e design iniziarono a copiare i colori accesi e lo stile della Pop Art per pubblicizzare e vendere le proprie merci, dimostrando come l'economia potesse plasmare la cultura del tempo.</p>
+            <p>Ho deciso di portare uno dei massimi esponenti della Pop Art italiana e mondiale, ovvero Tano Festa (1938-1988), figura chiave della celebre "Scuola di Piazza del Popolo" a Roma. Formatosi inizialmente come fotografo artistico, nei primi anni Sessanta avviò la sua carriera isolando oggetti quotidiani in legno, come porte, finestre e persiane, che dipingeva interamente con smalti industriali per privarli della loro funzione comune e trasformarli in veri e propri quadri-scultura. La sua intuizione più celebre e geniale arrivò però tra il 1963 e il 1964, in pieno miracolo economico: mentre gli artisti americani come Andy Warhol celebravano i prodotti dei supermercati o i divi di Hollywood, Festa capì che in Italia il vero "bene di largo consumo" e l'icona popolare per eccellenza era l'arte classica e rinascimentale, con cui i cittadini convivevano da secoli. Nacque così la sua famosissima serie "Omaggio a Michelangelo" (di cui fa parte l'opera L'Eden), in cui proiettava sulla tela le fotografie di capolavori come gli affreschi della Cappella Sistina, ridisegnandone i contorni con tinte piatte, accese e artificiali. Attraverso questo metodo innovativo, Festa dimostrò come i capolavori del passato potessero essere desacralizzati e reinterpretati come moderni manifesti pubblicitari, inserendosi perfettamente nei meccanismi visivi e commerciali della nuova società dei consumi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-educazione-fisica" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box" role="dialog" aria-label="Educazione fisica - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Educazione fisica - Collegamento con Economia</p>
+        <p>
+          In educazione fisica posso parlare dell'economia dello sport. Gli
+          eventi sportivi muovono denaro attraverso sponsor, biglietti,
+          televisioni, turismo e vendita di prodotti.
+        </p>
+        <p>
+          Lo sport non è solo attività fisica, ma anche lavoro e organizzazione
+          economica.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal-educazione-civica" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box" role="dialog" aria-label="Educazione civica - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Educazione civica - Collegamento con Economia</p>
+        <p>
+          In educazione civica l'economia si collega al lavoro, alle tasse e ai
+          diritti dei cittadini. La Costituzione italiana riconosce il lavoro
+          come un valore fondamentale.
+        </p>
+        <p>
+          Pagare le tasse serve anche a finanziare servizi pubblici come scuola,
+          sanità, trasporti e sicurezza.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal-latino" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box" role="dialog" aria-label="Latino - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Latino - Collegamento con Economia</p>
+        <p>
+          In latino posso collegare l'economia alla società romana. Nell'antica
+          Roma erano importanti il commercio, le monete, le strade e i mercati.
+        </p>
+        <p>
+          Le strade romane aiutavano gli scambi economici e permettevano di
+          collegare città e territori dell'Impero.
+        </p>
+      </div>
+    </div>
+
+    <div id="modal-religione" class="modal">
+      <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
+      <div class="modal-box" role="dialog" aria-label="Religione - Collegamento con Economia">
+        <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Religione - Collegamento con Economia</p>
+        <p>
+          In religione posso collegare l'economia al tema della giustizia
+          sociale. Molte religioni invitano ad aiutare chi ha meno e a non
+          mettere il denaro al centro di tutto.
+        </p>
+        <p>
+          Questo collegamento aiuta a riflettere su povertà, solidarietà,
+          lavoro dignitoso e uso responsabile delle ricchezze.
+        </p>
+      </div>
+    </div>
+
+    <section id="conclusione" class="sezione">
+      <h2>Conclusione</h2>
+      <p>
+        L'economia aiuta a capire meglio il mondo in cui viviamo. Ogni scelta
+        economica può avere conseguenze sulle persone, sull'ambiente e sulla
+        società. Per questo è importante imparare a consumare e scegliere in modo
+        responsabile.
+      </p>
+      <div class="azioni-sezione">
+        <a class="bottone-sezione" href="#introduzione">Torna all'introduzione</a>
+      </div>
+    </section>
+  </main>
+
+</body>
+
+</html>
