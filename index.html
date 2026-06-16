@@ -36,7 +36,7 @@
       max-width: 1100px;
       margin: 0 auto;
       min-height: 100vh;
-      padding: 64px 20px;
+      padding: 32px 20px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -262,9 +262,13 @@
 
     .contenuto-con-immagine {
       display: grid;
-      grid-template-columns: minmax(250px, 40%) 1fr;
-      gap: 24px;
+      grid-template-columns: minmax(200px, 38%) 1fr;
+      gap: 12px;
       align-items: start;
+    }
+
+    .contenuto-con-immagine + .contenuto-con-immagine {
+      margin-top: 8px;
     }
 
     .immagine-testo {
@@ -546,21 +550,21 @@ La ripresa arrivò nel 1932 con l'elezione del presidente Franklin D. Roosevelt,
           </div>
         </div>
 
-        <div class="contenuto-con-immagine" style="margin-top:20px">
+        <div class="contenuto-con-immagine">
           <div>
             <p>Nel 1978 fu scoperta la sua luna più grande, Caronte, seguita negli anni da altre quattro lune: Stige, Notte, Cerbero e Idra. Nel 2006 la sonda New Horizons della NASA fu lanciata dalla Terra con il preciso obiettivo di raggiungere Plutone. Dopo un viaggio di oltre 9 anni e 5 miliardi di chilometri, il 14 luglio 2015 New Horizons sorvolò Plutone, regalandoci le prime immagini ravvicinate mai viste: scoprì montagne di ghiaccio alte fino a 3500 metri, pianure di azoto ghiacciato (la famosa "Sputnik Planitia"), un'atmosfera sottile di azoto e metano, e persino segni di possibile attività geologica ancora in corso.</p>
           </div>
           <img class="immagine-testo immagine-orizzontale" src="immagini/scienze/image%20copy.png" alt="Plutone superficie">
         </div>
 
-        <div class="contenuto-con-immagine" style="margin-top:20px">
+        <div class="contenuto-con-immagine">
           <img class="immagine-testo" src="immagini/scienze/tobm.png" alt="Clyde Tombaugh">
           <div>
             <p>Clyde Tombaugh era un giovane astronomo americano. Lavorava all'Osservatorio Lowell in Arizona. Confrontava lastre fotografiche del cielo notturno, cercando un punto che si muoveva tra le stelle. Il 18 febbraio 1930, dopo mesi di lavoro, trovò un piccolo puntino che si muoveva: era Plutone. Questa scoperta lo rese famoso in tutto il mondo. Oggi Tombaugh è considerato uno dei più importanti astronomi del Novecento.</p>
           </div>
         </div>
 
-        <p style="margin-top:20px">Le scoperte su Plutone hanno un importante legame con l'economia. La missione New Horizons è costata circa 720 milioni di dollari, una cifra che può sembrare enorme ma che ha generato un indotto economico significativo: migliaia di posti di lavoro tra ingegneri, scienziati e tecnici, innovazioni tecnologiche poi riutilizzate in campo medico e industriale, e un enorme ritorno in termini di conoscenza. L'esplorazione spaziale, inoltre, è oggi un settore economico in forte crescita, con aziende private che investono miliardi e creano nuove opportunità di lavoro e sviluppo tecnologico.</p>
+        <p>Le scoperte su Plutone hanno un importante legame con l'economia. La missione New Horizons è costata circa 720 milioni di dollari, una cifra che può sembrare enorme ma che ha generato un indotto economico significativo: migliaia di posti di lavoro tra ingegneri, scienziati e tecnici, innovazioni tecnologiche poi riutilizzate in campo medico e industriale, e un enorme ritorno in termini di conoscenza. L'esplorazione spaziale, inoltre, è oggi un settore economico in forte crescita, con aziende private che investono miliardi e creano nuove opportunità di lavoro e sviluppo tecnologico.</p>
       </div>
     </div>
 
