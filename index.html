@@ -42,18 +42,24 @@
     }
 
     main {
+      width: 100vw;
       height: 100vh;
       overflow: hidden;
       scroll-behavior: smooth;
       background: rgba(245, 247, 250, 0.88);
+      display: flex;
+      flex-wrap: nowrap;
     }
 
     .sezione {
-      max-width: 1100px;
-      margin: 0 auto;
+      width: 100vw;
+      max-width: none;
       height: 100vh;
       min-height: 100vh;
-      padding: 32px 20px;
+      flex: 0 0 100vw;
+      margin: 0;
+      padding: 32px max(20px, calc((100vw - 1100px) / 2 + 20px));
+      position: relative;
       overflow-y: auto;
       overscroll-behavior: contain;
       display: flex;
@@ -62,8 +68,18 @@
       justify-content: safe center;
     }
 
+    .sezione--nav-destra {
+      padding-right: max(180px, calc((100vw - 1100px) / 2 + 20px));
+    }
+
+    .sezione--nav-sinistra {
+      padding-left: max(180px, calc((100vw - 1100px) / 2 + 20px));
+    }
+
     #mappa.sezione {
-      max-width: 1320px;
+      max-width: none;
+      padding-right: max(20px, calc((100vw - 1320px) / 2 + 20px));
+      padding-left: max(20px, calc((100vw - 1320px) / 2 + 20px));
     }
 
     h2 {
@@ -79,14 +95,6 @@
       margin-right: auto;
     }
 
-    .azioni-sezione {
-      margin-top: 28px;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
     .bottone-sezione {
       padding: 12px 18px;
       border-radius: 8px;
@@ -98,6 +106,44 @@
 
     .bottone-sezione:hover {
       background: #12345a;
+    }
+
+    .navigazione-laterale {
+      min-width: 136px;
+      position: absolute;
+      top: 50%;
+      z-index: 4;
+      text-align: center;
+      white-space: nowrap;
+      transform: translateY(-50%);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14);
+    }
+
+    .navigazione-laterale--sinistra {
+      left: 20px;
+    }
+
+    .navigazione-laterale--destra {
+      right: 20px;
+    }
+
+    .mappa-slide {
+      display: grid;
+      grid-template-columns: minmax(112px, auto) minmax(0, 1fr) minmax(112px, auto);
+      gap: 14px;
+      align-items: center;
+    }
+
+    .mappa-slide>.bottone-sezione {
+      min-width: 112px;
+      justify-self: center;
+      text-align: center;
+      white-space: nowrap;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14);
+    }
+
+    .mappa-slide>.mappa-layout {
+      min-width: 0;
     }
 
     .mappa-layout {
@@ -190,6 +236,7 @@
       stroke: #9aaabd;
       stroke-width: 2.2;
       stroke-dasharray: 7 5;
+      stroke-linecap: round;
       marker-end: url(#punta-freccia);
       opacity: 0.72;
     }
@@ -203,7 +250,7 @@
       --nodo-bg-2: #f7fbff;
       --nodo-border: #bfdbfe;
       --nodo-accent: #2563eb;
-      width: 150px;
+      width: clamp(124px, 15%, 150px);
       min-height: 58px;
       padding: 12px;
       position: absolute;
@@ -286,7 +333,7 @@
     }
 
     .nodo-centro {
-      width: 180px;
+      width: clamp(150px, 18%, 180px);
       min-height: 82px;
       left: 50%;
       top: 50%;
@@ -641,19 +688,15 @@
         min-height: 0;
       }
 
-      #mappa .azioni-sezione {
-        margin-top: 14px;
-      }
-
       #mappa .nodo-mappa {
-        width: 138px;
+        width: clamp(116px, 14.5%, 138px);
         min-height: 48px;
         padding: 8px;
         font-size: 13px;
       }
 
       #mappa .nodo-centro {
-        width: 166px;
+        width: clamp(140px, 17%, 166px);
         min-height: 66px;
         font-size: 21px;
       }
@@ -674,24 +717,22 @@
         height: calc(100vh - 140px);
       }
 
-      #mappa .azioni-sezione {
-        margin-top: 10px;
-      }
-
       #mappa .bottone-sezione {
         padding: 9px 14px;
       }
 
       #mappa .nodo-mappa {
-        width: 124px;
-        min-height: 42px;
-        font-size: 12px;
+        width: clamp(78px, 18%, 94px);
+        min-height: 34px;
+        padding: 4px;
+        font-size: 10px;
+        line-height: 1.15;
       }
 
       #mappa .nodo-centro {
-        width: 146px;
-        min-height: 56px;
-        font-size: 18px;
+        width: clamp(104px, 24%, 124px);
+        min-height: 48px;
+        font-size: 15px;
         letter-spacing: 1px;
       }
     }
@@ -812,6 +853,20 @@
         min-height: 100vh;
         padding: 48px 18px;
       }
+
+      .sezione--nav-destra,
+      .sezione--nav-sinistra {
+        padding-right: 18px;
+        padding-left: 18px;
+      }
+
+      .navigazione-laterale {
+        position: static;
+        align-self: center;
+        margin-top: 24px;
+        transform: none;
+      }
+
     }
 
     @media (max-width: 800px) {
@@ -823,6 +878,29 @@
 
       #mappa .nodo-centro {
         grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .mappa-slide {
+        grid-template-columns: 1fr;
+      }
+
+      .mappa-slide>.bottone-sezione {
+        min-width: 0;
+        width: min(220px, 100%);
+      }
+
+      .mappa-slide>.bottone-sezione:first-child {
+        order: 2;
+      }
+
+      .mappa-slide>.mappa-layout {
+        order: 1;
+      }
+
+      .mappa-slide>.bottone-sezione:last-child {
+        order: 3;
       }
     }
 
@@ -841,10 +919,6 @@
       #mappa .mappa-concettuale {
         padding: 12px;
         gap: 6px;
-      }
-
-      #mappa .azioni-sezione {
-        margin-top: 16px;
       }
 
       #mappa .bottone-sezione {
@@ -867,13 +941,46 @@
         font-size: 20px;
       }
     }
+
+    @media (max-width: 800px) and (max-height: 620px) {
+      #mappa h2 {
+        margin-bottom: 8px;
+        font-size: 24px;
+      }
+
+      .mappa-slide {
+        grid-template-columns: 104px minmax(0, 1fr) 104px;
+        gap: 8px;
+      }
+
+      #mappa .bottone-sezione {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      #mappa .mappa-concettuale {
+        padding: 8px;
+        gap: 4px;
+      }
+
+      #mappa .nodo-mappa {
+        min-height: 34px;
+        padding: 5px;
+        font-size: 11px;
+      }
+
+      #mappa .nodo-centro {
+        min-height: 42px;
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
   <main>
-    <section id="introduzione" class="sezione">
+    <section id="introduzione" class="sezione sezione--nav-destra">
       <h2>Introduzione</h2>
       <p>
         Ho scelto di incentrare la mia tesina sull'economia perché è un tema che
@@ -888,86 +995,85 @@
         cambiamenti storici. Con questa mappa concettuale voglio mostrare i
         collegamenti che ho scelto con le diverse materie.
       </p>
-      <div class="azioni-sezione">
-        <a class="bottone-sezione" href="#mappa">Vai alla mappa concettuale</a>
-      </div>
+      <a class="bottone-sezione navigazione-laterale navigazione-laterale--destra" href="#mappa">Mappa concettuale</a>
     </section>
 
     <section id="mappa" class="sezione">
       <h2>Mappa dei collegamenti</h2>
-      <div class="mappa-layout">
-        <aside class="legenda-mappa" aria-label="Legenda dei colori della mappa">
-          <p class="legenda-titolo">Legenda</p>
-          <div class="voce-legenda gruppo-umanistica">
-            <div>
-              <p class="nome-legenda">Umanistiche</p>
-              <p class="descrizione-legenda">Cultura, memoria e linguaggi per raccontare i cambiamenti economici.</p>
+      <div class="mappa-slide">
+        <a class="bottone-sezione" href="#introduzione">Introduzione</a>
+        <div class="mappa-layout">
+          <aside class="legenda-mappa" aria-label="Legenda dei colori della mappa">
+            <p class="legenda-titolo">Legenda</p>
+            <div class="voce-legenda gruppo-umanistica">
+              <div>
+                <p class="nome-legenda">Umanistiche</p>
+                <p class="descrizione-legenda">Cultura, memoria e linguaggi per raccontare i cambiamenti economici.</p>
+              </div>
             </div>
-          </div>
-          <div class="voce-legenda gruppo-territorio">
-            <div>
-              <p class="nome-legenda">Territorio</p>
-              <p class="descrizione-legenda">Spazio, risorse e popolazione che influenzano sviluppo e ricchezza.</p>
+            <div class="voce-legenda gruppo-territorio">
+              <div>
+                <p class="nome-legenda">Territorio</p>
+                <p class="descrizione-legenda">Spazio, risorse e popolazione che influenzano sviluppo e ricchezza.</p>
+              </div>
             </div>
-          </div>
-          <div class="voce-legenda gruppo-scientifica">
-            <div>
-              <p class="nome-legenda">Scienze e tecnologia</p>
-              <p class="descrizione-legenda">Ricerca, scoperte e innovazioni che creano progresso.</p>
+            <div class="voce-legenda gruppo-scientifica">
+              <div>
+                <p class="nome-legenda">Scienze e tecnologia</p>
+                <p class="descrizione-legenda">Ricerca, scoperte e innovazioni che creano progresso.</p>
+              </div>
             </div>
-          </div>
-          <div class="voce-legenda gruppo-lingue">
-            <div>
-              <p class="nome-legenda">Lingue</p>
-              <p class="descrizione-legenda">Scambi, cooperazione e rapporti economici tra Paesi.</p>
+            <div class="voce-legenda gruppo-lingue">
+              <div>
+                <p class="nome-legenda">Lingue</p>
+                <p class="descrizione-legenda">Scambi, cooperazione e rapporti economici tra Paesi.</p>
+              </div>
             </div>
-          </div>
-          <div class="voce-legenda gruppo-societa">
-            <div>
-              <p class="nome-legenda">Società</p>
-              <p class="descrizione-legenda">Diritti, valori, cittadinanza, sport e vita quotidiana.</p>
+            <div class="voce-legenda gruppo-societa">
+              <div>
+                <p class="nome-legenda">Società</p>
+                <p class="descrizione-legenda">Diritti, valori, cittadinanza, sport e vita quotidiana.</p>
+              </div>
             </div>
-          </div>
-        </aside>
+          </aside>
 
-        <div class="mappa-concettuale">
-          <svg class="frecce-mappa" viewBox="0 0 1000 640" aria-hidden="true">
-            <defs>
-              <marker id="punta-freccia" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                <path d="M 0 0 L 8 4 L 0 8 z" fill="#94a3b8"></path>
-              </marker>
-            </defs>
-            <line x1="500" y1="320" x2="200" y2="70"></line>
-            <line x1="500" y1="320" x2="390" y2="70"></line>
-            <line x1="500" y1="320" x2="610" y2="70"></line>
-            <line x1="500" y1="320" x2="800" y2="70"></line>
-            <line x1="500" y1="320" x2="120" y2="230"></line>
-            <line x1="500" y1="320" x2="880" y2="230"></line>
-            <line x1="500" y1="320" x2="120" y2="410"></line>
-            <line x1="500" y1="320" x2="880" y2="410"></line>
-            <line x1="500" y1="320" x2="200" y2="570"></line>
-            <line x1="500" y1="320" x2="390" y2="570"></line>
-            <line x1="500" y1="320" x2="610" y2="570"></line>
-            <line x1="500" y1="320" x2="800" y2="570"></line>
-          </svg>
+          <div class="mappa-concettuale">
+            <svg class="frecce-mappa" viewBox="0 0 1000 640" aria-hidden="true">
+              <defs>
+                <marker id="punta-freccia" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                  <path d="M 0 0 L 8 4 L 0 8 z" fill="#94a3b8"></path>
+                </marker>
+              </defs>
+              <line x1="500" y1="320" x2="210" y2="104"></line>
+              <line x1="500" y1="320" x2="402" y2="104"></line>
+              <line x1="500" y1="320" x2="598" y2="104"></line>
+              <line x1="500" y1="320" x2="790" y2="104"></line>
+              <line x1="500" y1="320" x2="205" y2="230"></line>
+              <line x1="500" y1="320" x2="795" y2="230"></line>
+              <line x1="500" y1="320" x2="205" y2="410"></line>
+              <line x1="500" y1="320" x2="795" y2="410"></line>
+              <line x1="500" y1="320" x2="210" y2="536"></line>
+              <line x1="500" y1="320" x2="402" y2="536"></line>
+              <line x1="500" y1="320" x2="598" y2="536"></line>
+              <line x1="500" y1="320" x2="790" y2="536"></line>
+            </svg>
 
-          <div class="nodo-mappa nodo-centro">Economia</div>
-          <a class="nodo-mappa nodo-1 gruppo-umanistica" href="#modal-storia">Storia</a>
-          <a class="nodo-mappa nodo-2 gruppo-territorio" href="#modal-geografia">Geografia</a>
-          <a class="nodo-mappa nodo-3 gruppo-umanistica" href="#modal-italiano">Italiano</a>
-          <a class="nodo-mappa nodo-4 gruppo-scientifica" href="#modal-scienze">Scienze</a>
-          <a class="nodo-mappa nodo-5 gruppo-lingue" href="#modal-inglese">Inglese</a>
-          <a class="nodo-mappa nodo-6 gruppo-lingue" href="#modal-spagnolo">Spagnolo</a>
-          <a class="nodo-mappa nodo-7 gruppo-scientifica" href="#modal-tecnologia">Tecnologia</a>
-          <a class="nodo-mappa nodo-8 gruppo-umanistica" href="#modal-arte">Arte</a>
-          <a class="nodo-mappa nodo-9 gruppo-societa" href="#modal-educazione-fisica">Educazione fisica</a>
-          <a class="nodo-mappa nodo-10 gruppo-societa" href="#modal-educazione-civica">Educazione civica</a>
-          <a class="nodo-mappa nodo-11 gruppo-umanistica" href="#modal-latino">Latino</a>
-          <a class="nodo-mappa nodo-12 gruppo-societa" href="#modal-religione">Religione</a>
+            <div class="nodo-mappa nodo-centro">Economia</div>
+            <a class="nodo-mappa nodo-1 gruppo-umanistica" href="#modal-storia">Storia</a>
+            <a class="nodo-mappa nodo-2 gruppo-territorio" href="#modal-geografia">Geografia</a>
+            <a class="nodo-mappa nodo-3 gruppo-umanistica" href="#modal-italiano">Italiano</a>
+            <a class="nodo-mappa nodo-4 gruppo-scientifica" href="#modal-scienze">Scienze</a>
+            <a class="nodo-mappa nodo-5 gruppo-lingue" href="#modal-inglese">Inglese</a>
+            <a class="nodo-mappa nodo-6 gruppo-lingue" href="#modal-spagnolo">Spagnolo</a>
+            <a class="nodo-mappa nodo-7 gruppo-scientifica" href="#modal-tecnologia">Tecnologia</a>
+            <a class="nodo-mappa nodo-8 gruppo-umanistica" href="#modal-arte">Arte</a>
+            <a class="nodo-mappa nodo-9 gruppo-societa" href="#modal-educazione-fisica">Educazione fisica</a>
+            <a class="nodo-mappa nodo-10 gruppo-societa" href="#modal-educazione-civica">Educazione civica</a>
+            <a class="nodo-mappa nodo-11 gruppo-umanistica" href="#modal-latino">Latino</a>
+            <a class="nodo-mappa nodo-12 gruppo-societa" href="#modal-religione">Religione</a>
+          </div>
         </div>
-      </div>
-      <div class="azioni-sezione">
-        <a class="bottone-sezione" href="#conclusione">Vai alla conclusione</a>
+        <a class="bottone-sezione" href="#conclusione">Conclusione</a>
       </div>
     </section>
 
@@ -1401,7 +1507,7 @@
       </div>
     </div>
 
-    <section id="conclusione" class="sezione">
+    <section id="conclusione" class="sezione sezione--nav-sinistra">
       <h2>Conclusione</h2>
       <p>
         L'economia aiuta a capire meglio il mondo in cui viviamo. Ogni scelta
@@ -1410,15 +1516,91 @@
         responsabile. Le fonti online consultate sono raccolte nei
         <a class="link-riferimenti" href="#modal-riferimenti">riferimenti</a>.
       </p>
-      <div class="azioni-sezione">
-        <a class="bottone-sezione" href="#introduzione">Torna all'introduzione</a>
-      </div>
+      <a class="bottone-sezione navigazione-laterale navigazione-laterale--sinistra" href="#mappa">Mappa concettuale</a>
     </section>
   </main>
 
   <script>
     const contenitorePrincipale = document.querySelector("main");
     const sezioniPrincipali = ["introduzione", "mappa", "conclusione"];
+    const mappaConcettuale = document.querySelector(".mappa-concettuale");
+    const svgFrecceMappa = document.querySelector(".frecce-mappa");
+    const nodoEconomia = document.querySelector(".nodo-centro");
+    const nodiMaterie = Array.from(document.querySelectorAll(".nodo-mappa:not(.nodo-centro)"));
+    const lineeMappa = svgFrecceMappa ? Array.from(svgFrecceMappa.querySelectorAll("line")) : [];
+
+    function rettangoloRelativo(elemento, contenitore) {
+      const rettangolo = elemento.getBoundingClientRect();
+      const area = contenitore.getBoundingClientRect();
+
+      return {
+        x: rettangolo.left - area.left,
+        y: rettangolo.top - area.top,
+        width: rettangolo.width,
+        height: rettangolo.height,
+        centroX: rettangolo.left - area.left + rettangolo.width / 2,
+        centroY: rettangolo.top - area.top + rettangolo.height / 2
+      };
+    }
+
+    function puntoSulBordo(rettangolo, destinazione) {
+      const dx = destinazione.x - rettangolo.centroX;
+      const dy = destinazione.y - rettangolo.centroY;
+
+      if (dx === 0 && dy === 0) {
+        return { x: rettangolo.centroX, y: rettangolo.centroY };
+      }
+
+      const scalaX = dx === 0 ? Infinity : rettangolo.width / 2 / Math.abs(dx);
+      const scalaY = dy === 0 ? Infinity : rettangolo.height / 2 / Math.abs(dy);
+      const scala = Math.min(scalaX, scalaY);
+
+      return {
+        x: rettangolo.centroX + dx * scala,
+        y: rettangolo.centroY + dy * scala
+      };
+    }
+
+    function aggiornaFrecceMappa() {
+      if (!mappaConcettuale || !svgFrecceMappa || !nodoEconomia || !lineeMappa.length) {
+        return;
+      }
+
+      const area = mappaConcettuale.getBoundingClientRect();
+
+      if (!area.width || !area.height) {
+        return;
+      }
+
+      svgFrecceMappa.setAttribute("viewBox", "0 0 " + area.width + " " + area.height);
+
+      const rettangoloEconomia = rettangoloRelativo(nodoEconomia, mappaConcettuale);
+      const centroEconomia = {
+        x: rettangoloEconomia.centroX,
+        y: rettangoloEconomia.centroY
+      };
+
+      lineeMappa.forEach(function (linea, indice) {
+        const nodo = nodiMaterie[indice];
+
+        if (!nodo) {
+          return;
+        }
+
+        const rettangoloNodo = rettangoloRelativo(nodo, mappaConcettuale);
+        const centroNodo = {
+          x: rettangoloNodo.centroX,
+          y: rettangoloNodo.centroY
+        };
+        const partenza = puntoSulBordo(rettangoloEconomia, centroNodo);
+        const arrivo = puntoSulBordo(rettangoloNodo, centroEconomia);
+
+        linea.setAttribute("x1", partenza.x.toFixed(1));
+        linea.setAttribute("y1", partenza.y.toFixed(1));
+        linea.setAttribute("x2", arrivo.x.toFixed(1));
+        linea.setAttribute("y2", arrivo.y.toFixed(1));
+      });
+    }
 
     function sezioneDaHash(hash) {
       if (!hash || hash === "#") {
@@ -1445,9 +1627,30 @@
       }
 
       contenitorePrincipale.scrollTo({
-        top: sezione.offsetTop,
+        left: sezione.offsetLeft,
+        top: 0,
         behavior: comportamento
       });
+    }
+
+    function aggiornaHash(hash) {
+      if (window.location.hash === hash) {
+        aggiornaStatoModale();
+        return;
+      }
+
+      history.pushState(null, "", hash);
+      aggiornaStatoModale();
+    }
+
+    function navigaTraSezioni(direzione) {
+      const sezioneCorrente = sezioneDaHash(window.location.hash);
+      const indiceCorrente = sezioniPrincipali.indexOf(sezioneCorrente);
+      const prossimoIndice = Math.max(0, Math.min(sezioniPrincipali.length - 1, indiceCorrente + direzione));
+
+      if (prossimoIndice !== indiceCorrente) {
+        aggiornaHash("#" + sezioniPrincipali[prossimoIndice]);
+      }
     }
 
     function aggiornaStatoModale(comportamento = "smooth") {
@@ -1468,6 +1671,7 @@
       }
 
       vaiAllaSezione(sezioneDaHash(hash), comportamento);
+      requestAnimationFrame(aggiornaFrecceMappa);
     }
 
     document.addEventListener("click", function (evento) {
@@ -1485,8 +1689,42 @@
       }
 
       evento.preventDefault();
-      history.pushState(null, "", hash);
-      aggiornaStatoModale();
+      aggiornaHash(hash);
+    });
+
+    document.addEventListener("keydown", function (evento) {
+      if (evento.defaultPrevented || evento.target.isContentEditable) {
+        return;
+      }
+
+      const elemento = evento.target.tagName;
+
+      if (["INPUT", "TEXTAREA", "SELECT"].includes(elemento)) {
+        return;
+      }
+
+      const hash = window.location.hash || "#introduzione";
+      const modaleAperta = hash.startsWith("#modal-");
+
+      if (evento.key === "Escape" && modaleAperta) {
+        evento.preventDefault();
+        aggiornaHash(hash === "#modal-riferimenti" ? "#conclusione" : "#mappa");
+        return;
+      }
+
+      if (modaleAperta) {
+        return;
+      }
+
+      if (evento.key === "ArrowRight" || evento.key === "PageDown") {
+        evento.preventDefault();
+        navigaTraSezioni(1);
+      }
+
+      if (evento.key === "ArrowLeft" || evento.key === "PageUp") {
+        evento.preventDefault();
+        navigaTraSezioni(-1);
+      }
     });
 
     window.addEventListener("popstate", function () {
@@ -1495,11 +1733,19 @@
 
     window.addEventListener("resize", function () {
       vaiAllaSezione(sezioneDaHash(window.location.hash), "auto");
+      requestAnimationFrame(aggiornaFrecceMappa);
     });
 
     window.addEventListener("hashchange", function () {
       aggiornaStatoModale();
     });
+
+    window.addEventListener("load", aggiornaFrecceMappa);
+
+    if (document.fonts) {
+      document.fonts.ready.then(aggiornaFrecceMappa);
+    }
+
     aggiornaStatoModale("auto");
   </script>
 
