@@ -96,6 +96,46 @@
       max-width: none;
       padding-right: max(20px, calc((100vw - 1320px) / 2 + 20px));
       padding-left: max(20px, calc((100vw - 1320px) / 2 + 20px));
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr) 64px;
+      gap: 14px;
+      grid-template-rows: auto 1fr;
+    }
+
+    #mappa h2 {
+      grid-column: 1 / -1;
+      color: var(--colore-blu-editoriale);
+    }
+
+    .mappa-nav-arrow {
+      align-self: center;
+      justify-self: center;
+    }
+
+    .mappa-nav-arrow--sinistra {
+      grid-column: 1;
+      grid-row: 2;
+      position: static;
+      left: auto;
+      transform: none;
+    }
+
+    .mappa-nav-arrow--destra {
+      grid-column: 3;
+      grid-row: 2;
+      position: static;
+      right: auto;
+      transform: none;
+    }
+
+    .mappa-nav-arrow:hover {
+      transform: scale(1.16);
+    }
+
+    .mappa-slide {
+      grid-column: 2;
+      grid-row: 2;
+      max-width: 100%;
     }
 
     #mappa h2 {
@@ -1147,6 +1187,8 @@
 
     @media (max-width: 620px) {
       #mappa.sezione {
+        display: flex;
+        flex-direction: column;
         padding-bottom: 96px;
       }
 
