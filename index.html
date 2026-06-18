@@ -10,6 +10,20 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --colore-carta: #f4e6d6;
+      --colore-carta-chiara: #fff7ee;
+      --colore-carta-piena: #f8ead9;
+      --colore-inchiostro: #111111;
+      --colore-testo: #29231f;
+      --colore-muted: #6f6257;
+      --colore-linea: rgba(47, 39, 33, 0.22);
+      --colore-blu-editoriale: #004c97;
+      --colore-oro: #c78936;
+      --colore-rosso: #c40000;
+      --colore-verde: #0b7d3b;
+    }
+
     html {
       height: 100%;
       overflow: hidden;
@@ -21,9 +35,9 @@
       margin: 0;
       overflow: hidden;
       font-family: Arial, Helvetica, sans-serif;
-      color: #1f2933;
+      color: var(--colore-testo);
       background:
-        linear-gradient(rgba(15, 23, 42, 0.34), rgba(15, 23, 42, 0.34)),
+        linear-gradient(rgba(244, 230, 214, 0), rgba(244, 230, 214, 0.9)),
         url("immagini/sfondo/wall-street.jpg");
       background-size: cover;
       background-position: center;
@@ -46,7 +60,7 @@
       height: 100vh;
       overflow: hidden;
       scroll-behavior: smooth;
-      background: rgba(245, 247, 250, 0.88);
+      background: rgba(244, 230, 214, 0.84);
       display: flex;
       flex-wrap: nowrap;
     }
@@ -82,6 +96,14 @@
       padding-left: max(20px, calc((100vw - 1320px) / 2 + 20px));
     }
 
+    #mappa h2 {
+      color: var(--colore-blu-editoriale);
+    }
+
+    #conclusione h2 {
+      color: var(--colore-blu-editoriale);
+    }
+
     #introduzione.sezione {
       padding-bottom: 148px;
     }
@@ -89,7 +111,9 @@
     h2 {
       margin: 0 0 18px;
       font-size: 32px;
-      color: #0b1f3a;
+      color: var(--colore-inchiostro);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 800;
       text-align: center;
     }
 
@@ -101,7 +125,8 @@
 
     .titolo-tesina {
       margin: 0;
-      color: #0b1f3a;
+      color: var(--colore-inchiostro);
+      font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(48px, 7vw, 78px);
       line-height: 0.98;
       font-weight: 800;
@@ -109,7 +134,7 @@
 
     .sottotitolo-tesina {
       margin: 14px auto 34px;
-      color: #28415f;
+      color: var(--colore-blu-editoriale);
       font-size: clamp(18px, 2.2vw, 25px);
       font-weight: 700;
       line-height: 1.3;
@@ -119,10 +144,10 @@
       width: min(780px, 100%);
       margin: 0 auto;
       padding: 24px 28px;
-      border: 1px solid rgba(207, 217, 229, 0.9);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: 0 16px 38px rgba(15, 23, 42, 0.08);
+      border: 1px solid var(--colore-linea);
+      border-radius: 4px;
+      background: rgba(255, 247, 238, 0.86);
+      box-shadow: none;
       text-align: left;
     }
 
@@ -139,12 +164,12 @@
       padding: 16px 18px;
       position: absolute;
       bottom: 48px;
-      border: 1px solid rgba(207, 217, 229, 0.95);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.78);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid var(--colore-linea);
+      border-radius: 4px;
+      background: rgba(255, 247, 238, 0.84);
+      box-shadow: none;
       backdrop-filter: blur(8px);
-      color: #0b1f3a;
+      color: var(--colore-inchiostro);
     }
 
     .scheda-copertina--sinistra {
@@ -161,7 +186,7 @@
     }
 
     .scheda-copertina-etichetta {
-      color: #526173;
+      color: var(--colore-muted);
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -169,7 +194,7 @@
     }
 
     .scheda-copertina-valore {
-      color: #0b1f3a;
+      color: var(--colore-inchiostro);
       font-size: 16px;
       font-weight: 800;
       line-height: 1.35;
@@ -187,25 +212,25 @@
 
     .bottone-sezione {
       padding: 12px 18px;
-      border-radius: 8px;
+      border-radius: 4px;
       color: white;
-      background: #0b1f3a;
+      background: var(--colore-inchiostro);
       text-decoration: none;
       font-weight: bold;
     }
 
     .bottone-sezione:hover {
-      background: #12345a;
+      background: var(--colore-blu-editoriale);
     }
 
     .navigazione-freccia {
       width: 58px;
       height: 58px;
-      border: 1px solid rgba(255, 255, 255, 0.28);
+      border: 1px solid rgba(17, 17, 17, 0.25);
       border-radius: 50%;
       color: white;
-      background: rgba(11, 31, 58, 0.94);
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      background: rgba(17, 17, 17, 0.94);
+      box-shadow: 0 12px 30px rgba(47, 39, 33, 0.16);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -217,8 +242,8 @@
     }
 
     .navigazione-freccia:hover {
-      background: #12345a;
-      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.26);
+      background: var(--colore-blu-editoriale);
+      box-shadow: 0 18px 42px rgba(47, 39, 33, 0.24);
       transform: scale(1.16);
     }
 
@@ -279,10 +304,10 @@
 
     .legenda-mappa {
       padding: 18px;
-      border: 1px solid #dbe3ea;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
+      border: 1px solid var(--colore-linea);
+      border-radius: 4px;
+      background: rgba(255, 247, 238, 0.9);
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -290,7 +315,7 @@
 
     .legenda-titolo {
       margin: 0 0 12px;
-      color: #0b1f3a;
+      color: var(--colore-inchiostro);
       font-size: 15px;
       font-weight: bold;
       text-transform: uppercase;
@@ -300,9 +325,9 @@
       --nodo-bg: #eaf2ff;
       --nodo-bg-2: #f7fbff;
       --nodo-border: #bfdbfe;
-      --nodo-accent: #2563eb;
+      --nodo-accent: var(--colore-blu-editoriale);
       padding: 12px 0;
-      border-top: 1px solid #e6edf5;
+      border-top: 1px solid var(--colore-linea);
       display: grid;
       grid-template-columns: 16px 1fr;
       gap: 10px;
@@ -322,7 +347,7 @@
 
     .nome-legenda {
       margin: 0 0 3px;
-      color: #0b1f3a;
+      color: var(--colore-inchiostro);
       font-size: 13px;
       font-weight: bold;
       line-height: 1.25;
@@ -330,7 +355,7 @@
 
     .descrizione-legenda {
       margin: 0;
-      color: #526173;
+      color: var(--colore-muted);
       font-size: 12px;
       line-height: 1.35;
     }
@@ -338,14 +363,13 @@
     .mappa-concettuale {
       min-height: 620px;
       position: relative;
-      border: 1px solid #dbe3ea;
-      border-radius: 16px;
+      border: 1px solid var(--colore-linea);
+      border-radius: 4px;
       background:
-        linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(255, 255, 255, 0.98)),
-        radial-gradient(ellipse at 50% 50%, rgba(191, 219, 254, 0.12), transparent 70%),
-        white;
+        linear-gradient(180deg, rgba(255, 247, 238, 0.96), rgba(248, 234, 217, 0.92)),
+        radial-gradient(ellipse at 50% 50%, rgba(199, 137, 54, 0.1), transparent 70%);
       overflow: hidden;
-      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+      box-shadow: none;
     }
 
     .frecce-mappa {
@@ -357,7 +381,7 @@
     }
 
     .frecce-mappa line {
-      stroke: #9aaabd;
+      stroke: rgba(47, 39, 33, 0.42);
       stroke-width: 2.2;
       stroke-dasharray: 7 5;
       stroke-linecap: round;
@@ -366,7 +390,7 @@
     }
 
     .frecce-mappa path {
-      fill: #9aaabd;
+      fill: rgba(47, 39, 33, 0.48);
     }
 
     .frecce-mappa line.linea-nascosta-temporanea {
@@ -381,19 +405,19 @@
 
     .nodo-mappa {
       --nodo-bg: #eaf2ff;
-      --nodo-bg-2: #f7fbff;
-      --nodo-border: #bfdbfe;
-      --nodo-accent: #2563eb;
+      --nodo-bg-2: var(--colore-carta-chiara);
+      --nodo-border: rgba(47, 39, 33, 0.28);
+      --nodo-accent: var(--colore-blu-editoriale);
       width: clamp(124px, 15%, 150px);
       min-height: 58px;
       padding: 12px;
       position: absolute;
       border: 2px solid var(--nodo-border);
-      border-radius: 12px;
+      border-radius: 4px;
       background:
         linear-gradient(135deg, var(--nodo-bg), var(--nodo-bg-2));
-      color: #0b1f3a;
-      box-shadow: 0 7px 18px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+      color: var(--colore-inchiostro);
+      box-shadow: 0 5px 14px rgba(47, 39, 33, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -420,9 +444,9 @@
 
     .nodo-mappa:hover {
       border-color: var(--nodo-accent);
-      color: #0b1f3a;
-      background: linear-gradient(135deg, var(--nodo-bg-2), #ffffff);
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16), 0 2px 6px rgba(15, 23, 42, 0.06);
+      color: var(--colore-inchiostro);
+      background: linear-gradient(135deg, var(--nodo-bg-2), #fffdf9);
+      box-shadow: 0 10px 24px rgba(47, 39, 33, 0.16);
       transform: translate(-50%, -50%) scale(1.05);
     }
 
@@ -446,38 +470,38 @@
     }
 
     .gruppo-umanistica {
-      --nodo-bg: #fff1f2;
-      --nodo-bg-2: #fff8f8;
-      --nodo-border: #fecdd3;
-      --nodo-accent: #be123c;
+      --nodo-bg: #fff3ee;
+      --nodo-bg-2: #fff9f5;
+      --nodo-border: #dfb4a3;
+      --nodo-accent: var(--colore-rosso);
     }
 
     .gruppo-territorio {
-      --nodo-bg: #ecfdf5;
-      --nodo-bg-2: #f7fffb;
-      --nodo-border: #a7f3d0;
-      --nodo-accent: #047857;
+      --nodo-bg: #edf7ef;
+      --nodo-bg-2: #fbfff8;
+      --nodo-border: #9fc6a8;
+      --nodo-accent: var(--colore-verde);
     }
 
     .gruppo-scientifica {
-      --nodo-bg: #eef7ff;
-      --nodo-bg-2: #f8fcff;
-      --nodo-border: #bae6fd;
-      --nodo-accent: #0369a1;
+      --nodo-bg: #edf3fb;
+      --nodo-bg-2: #f9fbff;
+      --nodo-border: #9eb6d2;
+      --nodo-accent: var(--colore-blu-editoriale);
     }
 
     .gruppo-lingue {
-      --nodo-bg: #fff7ed;
-      --nodo-bg-2: #fffaf3;
-      --nodo-border: #fed7aa;
-      --nodo-accent: #c2410c;
+      --nodo-bg: #fff1df;
+      --nodo-bg-2: #fff9ef;
+      --nodo-border: #dfb980;
+      --nodo-accent: var(--colore-oro);
     }
 
     .gruppo-societa {
-      --nodo-bg: #f0fdfa;
-      --nodo-bg-2: #f8fffd;
-      --nodo-border: #99f6e4;
-      --nodo-accent: #0f766e;
+      --nodo-bg: #eef5f1;
+      --nodo-bg-2: #fbfffc;
+      --nodo-border: #9fc6b9;
+      --nodo-accent: #0a7669;
     }
 
     .nodo-centro {
@@ -485,9 +509,10 @@
       min-height: 82px;
       left: 50%;
       top: 50%;
-      border-color: #0b1f3a;
-      background: linear-gradient(135deg, #0b1f3a, #1a3555);
+      border-color: var(--colore-inchiostro);
+      background: linear-gradient(135deg, #111111, #2f2721);
       color: white;
+      font-family: Georgia, "Times New Roman", serif;
       font-size: 24px;
       letter-spacing: 2px;
       box-shadow: 0 8px 32px rgba(11, 31, 58, 0.25);
@@ -500,8 +525,8 @@
     }
 
     .nodo-centro:hover {
-      border-color: #0b1f3a;
-      background: linear-gradient(135deg, #0b1f3a, #1a3555);
+      border-color: var(--colore-inchiostro);
+      background: linear-gradient(135deg, #111111, #2f2721);
       color: white;
       box-shadow: 0 12px 48px rgba(11, 31, 58, 0.35);
       transform: translate(-50%, -50%) scale(1.06);
@@ -589,7 +614,11 @@
     }
 
     #mappa .navigazione-freccia {
-      background: rgba(11, 31, 58, 0.92);
+      background: rgba(17, 17, 17, 0.94);
+    }
+
+    #mappa .navigazione-freccia:hover {
+      background: var(--colore-blu-editoriale);
     }
 
     .modal {
@@ -617,7 +646,7 @@
     .modal-sfondo {
       position: absolute;
       inset: 0;
-      background: rgba(15, 23, 42, 0.72);
+      background: rgba(17, 17, 17, 0.72);
     }
 
     .modal-box {
@@ -628,9 +657,10 @@
       z-index: 1;
       overflow: auto;
       overscroll-behavior: contain;
-      border-radius: 8px;
-      background: white;
-      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+      border: 1px solid var(--colore-linea);
+      border-radius: 4px;
+      background: var(--colore-carta-chiara);
+      box-shadow: 0 24px 80px rgba(47, 39, 33, 0.28);
       opacity: 0;
       transform: translateY(14px) scale(0.972);
       transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -673,8 +703,8 @@
       width: 100%;
       max-height: none;
       object-fit: contain;
-      border-radius: 8px;
-      border: 1px solid #dbe3ea;
+      border-radius: 4px;
+      border: 1px solid var(--colore-linea);
     }
 
     .immagine-verticale {
@@ -697,7 +727,7 @@
       right: 18px;
       border-radius: 50%;
       color: white;
-      background: #0b1f3a;
+      background: var(--colore-inchiostro);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -708,15 +738,16 @@
     }
 
     .chiudi-modal:hover {
-      background: #12345a;
+      background: var(--colore-blu-editoriale);
     }
 
     .etichetta-modal {
       margin: 0 48px;
       padding-bottom: 14px;
-      border-bottom: 1px solid #dbe3ea;
-      color: #0b1f3a;
-      font-size: 14px;
+      border-bottom: 1px solid var(--colore-linea);
+      color: var(--colore-inchiostro);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
       font-weight: bold;
       text-align: center;
       text-transform: uppercase;
@@ -742,14 +773,14 @@
     }
 
     .link-riferimenti {
-      color: #0b1f3a;
+      color: var(--colore-blu-editoriale);
       font-weight: bold;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
 
     .link-riferimenti:hover {
-      color: #12345a;
+      color: var(--colore-inchiostro);
     }
 
     .lista-riferimenti {
@@ -757,29 +788,29 @@
       margin: 0 auto;
       padding: 0;
       list-style: none;
-      border-top: 1px solid #cfd9e5;
+      border-top: 1px solid var(--colore-linea);
     }
 
     .lista-riferimenti li {
       padding: 14px 0;
-      border-bottom: 1px solid #cfd9e5;
+      border-bottom: 1px solid var(--colore-linea);
     }
 
     .lista-riferimenti a {
-      color: #0b1f3a;
+      color: var(--colore-blu-editoriale);
       font-weight: bold;
       text-decoration: none;
     }
 
     .lista-riferimenti a:hover {
-      color: #12345a;
+      color: var(--colore-inchiostro);
       text-decoration: underline;
     }
 
     .nota-riferimento {
       display: block;
       margin-top: 4px;
-      color: #526173;
+      color: var(--colore-muted);
       font-size: 14px;
       line-height: 1.45;
     }
@@ -787,12 +818,12 @@
     .riferimenti-modale {
       margin-top: 22px;
       padding-top: 14px;
-      border-top: 1px solid #dbe3ea;
+      border-top: 1px solid var(--colore-linea);
     }
 
     .riferimenti-modale-titolo {
       margin: 0 0 8px;
-      color: #0b1f3a;
+      color: var(--colore-inchiostro);
       font-size: 13px;
       font-weight: bold;
       text-transform: uppercase;
@@ -801,7 +832,7 @@
     .riferimenti-modale a {
       display: inline-block;
       margin-right: 12px;
-      color: #0b1f3a;
+      color: var(--colore-blu-editoriale);
       font-size: 14px;
       font-weight: bold;
       text-decoration: underline;
@@ -809,7 +840,7 @@
     }
 
     .riferimenti-modale a:hover {
-      color: #12345a;
+      color: var(--colore-inchiostro);
     }
 
     .modal-box p.riferimenti-intro {
@@ -928,9 +959,9 @@
       .voce-legenda {
         min-width: 112px;
         padding: 8px;
-        border: 1px solid #e6edf5;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--colore-linea);
+        border-radius: 4px;
+        background: rgba(255, 247, 238, 0.76);
         display: flex;
         align-items: center;
       }
@@ -981,7 +1012,7 @@
       .nodo-mappa:not(.nodo-centro)::before {
         content: "→";
         margin-right: 10px;
-        color: #0b1f3a;
+        color: var(--colore-inchiostro);
       }
 
       .nodo-mappa:not(.nodo-centro)::after {
@@ -1286,7 +1317,7 @@
             <svg class="frecce-mappa" viewBox="0 0 1000 640" aria-hidden="true">
               <defs>
                 <marker id="punta-freccia" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                  <path d="M 0 0 L 8 4 L 0 8 z" fill="#94a3b8"></path>
+                  <path d="M 0 0 L 8 4 L 0 8 z" fill="#5f554d"></path>
                 </marker>
               </defs>
               <line x1="500" y1="320" x2="210" y2="104"></line>
@@ -1873,7 +1904,7 @@
       };
 
       lineaFusione.classList.add("freccia-fusione");
-      lineaFusione.style.stroke = colore || "#9aaabd";
+      lineaFusione.style.stroke = colore || "#5f554d";
       lineaOriginale.classList.add("linea-nascosta-temporanea");
       lineaOriginale.after(lineaFusione);
 
