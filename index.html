@@ -27,6 +27,16 @@
       line-height: 1.6;
     }
 
+    body.modale-aperta {
+      overflow: hidden;
+    }
+
+    @supports selector(body:has(.modal:target)) {
+      body:has(.modal:target) {
+        overflow: hidden;
+      }
+    }
+
     main {
       min-height: 100vh;
       background: rgba(245, 247, 250, 0.88);
@@ -251,6 +261,7 @@
       position: relative;
       z-index: 1;
       overflow: auto;
+      overscroll-behavior: contain;
       border-radius: 8px;
       background: white;
       box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
@@ -715,6 +726,15 @@ La ripresa arrivò nel 1932 con l'elezione del presidente Franklin D. Roosevelt,
       </div>
     </section>
   </main>
+
+  <script>
+    function aggiornaStatoModale() {
+      document.body.classList.toggle("modale-aperta", window.location.hash.startsWith("#modal-"));
+    }
+
+    window.addEventListener("hashchange", aggiornaStatoModale);
+    aggiornaStatoModale();
+  </script>
 
 </body>
 
