@@ -245,6 +245,16 @@
       fill: #9aaabd;
     }
 
+    .frecce-mappa line.linea-nascosta-temporanea {
+      opacity: 0;
+    }
+
+    .frecce-mappa line.freccia-fusione {
+      stroke-width: 3;
+      stroke-dasharray: 8 4;
+      opacity: 0.9;
+    }
+
     .nodo-mappa {
       --nodo-bg: #eaf2ff;
       --nodo-bg-2: #f7fbff;
@@ -295,6 +305,20 @@
     .nodo-mappa:focus-visible {
       outline: 3px solid rgba(11, 31, 58, 0.26);
       outline-offset: 4px;
+    }
+
+    .mappa-concettuale.in-fusione .nodo-mappa {
+      pointer-events: none;
+    }
+
+    .nodo-mappa.nodo-nascosto-temporaneo {
+      opacity: 0;
+    }
+
+    .nodo-fusione-clone {
+      pointer-events: none;
+      z-index: 6;
+      will-change: left, top, transform, opacity, filter;
     }
 
     .gruppo-umanistica {
@@ -357,6 +381,27 @@
       color: white;
       box-shadow: 0 12px 48px rgba(11, 31, 58, 0.35);
       transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .nodo-centro.nodo-centro-fusione {
+      animation: fusione-centro 0.52s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @keyframes fusione-centro {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 8px 32px rgba(11, 31, 58, 0.25);
+      }
+
+      56% {
+        transform: translate(-50%, -50%) scale(1.12);
+        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.12), 0 18px 56px rgba(11, 31, 58, 0.44);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 8px 32px rgba(11, 31, 58, 0.25);
+      }
     }
 
     .nodo-1 {
@@ -1528,6 +1573,8 @@
     const nodoEconomia = document.querySelector(".nodo-centro");
     const nodiMaterie = Array.from(document.querySelectorAll(".nodo-mappa:not(.nodo-centro)"));
     const lineeMappa = svgFrecceMappa ? Array.from(svgFrecceMappa.querySelectorAll("line")) : [];
+    const riduciMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let animazioneMateriaInCorso = false;
 
     function rettangoloRelativo(elemento, contenitore) {
       const rettangolo = elemento.getBoundingClientRect();
@@ -1599,6 +1646,169 @@
         linea.setAttribute("y1", partenza.y.toFixed(1));
         linea.setAttribute("x2", arrivo.x.toFixed(1));
         linea.setAttribute("y2", arrivo.y.toFixed(1));
+      });
+    }
+
+    function morbidaEntrataUscita(progresso) {
+      return progresso < 0.5
+        ? 2 * progresso * progresso
+        : 1 - Math.pow(-2 * progresso + 2, 2) / 2;
+    }
+
+    function animaFrecciaInFusione(lineaOriginale, colore, durata) {
+      const lineaFusione = lineaOriginale.cloneNode(false);
+      const inizio = {
+        x1: Number(lineaOriginale.getAttribute("x1")),
+        y1: Number(lineaOriginale.getAttribute("y1")),
+        x2: Number(lineaOriginale.getAttribute("x2")),
+        y2: Number(lineaOriginale.getAttribute("y2"))
+      };
+
+      lineaFusione.classList.add("freccia-fusione");
+      lineaFusione.style.stroke = colore || "#9aaabd";
+      lineaOriginale.classList.add("linea-nascosta-temporanea");
+      lineaOriginale.after(lineaFusione);
+
+      return new Promise(function (resolve) {
+        const momentoIniziale = performance.now();
+
+        function disegnaFotogramma(adesso) {
+          const progresso = Math.min((adesso - momentoIniziale) / durata, 1);
+          const avanzamento = morbidaEntrataUscita(progresso);
+          const x2 = inizio.x2 + (inizio.x1 - inizio.x2) * avanzamento;
+          const y2 = inizio.y2 + (inizio.y1 - inizio.y2) * avanzamento;
+
+          lineaFusione.setAttribute("x1", inizio.x1.toFixed(1));
+          lineaFusione.setAttribute("y1", inizio.y1.toFixed(1));
+          lineaFusione.setAttribute("x2", x2.toFixed(1));
+          lineaFusione.setAttribute("y2", y2.toFixed(1));
+          lineaFusione.style.opacity = String(0.9 * (1 - avanzamento));
+
+          if (progresso < 1) {
+            requestAnimationFrame(disegnaFotogramma);
+            return;
+          }
+
+          resolve(lineaFusione);
+        }
+
+        requestAnimationFrame(disegnaFotogramma);
+      });
+    }
+
+    function ripristinaFusioneMateria(nodo, linea, cloneNodo, cloneLinea) {
+      if (cloneNodo) {
+        cloneNodo.remove();
+      }
+
+      if (cloneLinea) {
+        cloneLinea.remove();
+      }
+
+      if (nodo) {
+        nodo.classList.remove("nodo-nascosto-temporaneo");
+      }
+
+      if (linea) {
+        linea.classList.remove("linea-nascosta-temporanea");
+      }
+
+      if (mappaConcettuale) {
+        mappaConcettuale.classList.remove("in-fusione");
+      }
+
+      if (nodoEconomia) {
+        nodoEconomia.classList.remove("nodo-centro-fusione");
+      }
+
+      animazioneMateriaInCorso = false;
+      requestAnimationFrame(aggiornaFrecceMappa);
+    }
+
+    function apriModaleConFusione(nodo, hash) {
+      if (
+        animazioneMateriaInCorso ||
+        riduciMovimento.matches ||
+        !mappaConcettuale ||
+        !nodoEconomia ||
+        !svgFrecceMappa
+      ) {
+        aggiornaHash(hash);
+        return;
+      }
+
+      aggiornaFrecceMappa();
+
+      const indice = nodiMaterie.indexOf(nodo);
+      const linea = lineeMappa[indice];
+
+      if (!linea) {
+        aggiornaHash(hash);
+        return;
+      }
+
+      const rettangoloNodo = rettangoloRelativo(nodo, mappaConcettuale);
+      const rettangoloEconomia = rettangoloRelativo(nodoEconomia, mappaConcettuale);
+      const cloneNodo = nodo.cloneNode(true);
+      const coloreMateria = getComputedStyle(nodo).getPropertyValue("--nodo-accent").trim();
+      const durataFusione = 520;
+
+      animazioneMateriaInCorso = true;
+      mappaConcettuale.classList.add("in-fusione");
+      nodoEconomia.classList.add("nodo-centro-fusione");
+      nodo.classList.add("nodo-nascosto-temporaneo");
+
+      cloneNodo.removeAttribute("href");
+      cloneNodo.setAttribute("aria-hidden", "true");
+      cloneNodo.classList.add("nodo-fusione-clone");
+      cloneNodo.style.left = rettangoloNodo.centroX + "px";
+      cloneNodo.style.top = rettangoloNodo.centroY + "px";
+      cloneNodo.style.width = rettangoloNodo.width + "px";
+      cloneNodo.style.height = rettangoloNodo.height + "px";
+      cloneNodo.style.minHeight = "0";
+      cloneNodo.style.transition = "none";
+      mappaConcettuale.appendChild(cloneNodo);
+
+      const animazioneNodo = cloneNodo.animate([
+        {
+          left: rettangoloNodo.centroX + "px",
+          top: rettangoloNodo.centroY + "px",
+          opacity: 1,
+          filter: "blur(0)",
+          transform: "translate(-50%, -50%) scale(1)"
+        },
+        {
+          left: (rettangoloNodo.centroX + rettangoloEconomia.centroX) / 2 + "px",
+          top: (rettangoloNodo.centroY + rettangoloEconomia.centroY) / 2 + "px",
+          opacity: 0.96,
+          filter: "blur(0)",
+          transform: "translate(-50%, -50%) scale(1.04)"
+        },
+        {
+          left: rettangoloEconomia.centroX + "px",
+          top: rettangoloEconomia.centroY + "px",
+          opacity: 0,
+          filter: "blur(2px)",
+          transform: "translate(-50%, -50%) scale(0.32)"
+        }
+      ], {
+        duration: durataFusione,
+        easing: "cubic-bezier(0.2, 0.82, 0.2, 1)",
+        fill: "forwards"
+      });
+
+      const animazioneFreccia = animaFrecciaInFusione(linea, coloreMateria, durataFusione - 70);
+
+      Promise.all([
+        animazioneNodo.finished.catch(function () { return null; }),
+        animazioneFreccia
+      ]).then(function (risultati) {
+        const cloneLinea = risultati[1];
+
+        aggiornaHash(hash);
+        window.setTimeout(function () {
+          ripristinaFusioneMateria(nodo, linea, cloneNodo, cloneLinea);
+        }, 80);
       });
     }
 
@@ -1689,6 +1899,16 @@
       }
 
       evento.preventDefault();
+
+      if (animazioneMateriaInCorso) {
+        return;
+      }
+
+      if (link.classList.contains("nodo-mappa") && hash.startsWith("#modal-")) {
+        apriModaleConFusione(link, hash);
+        return;
+      }
+
       aggiornaHash(hash);
     });
 
@@ -1700,6 +1920,11 @@
       const elemento = evento.target.tagName;
 
       if (["INPUT", "TEXTAREA", "SELECT"].includes(elemento)) {
+        return;
+      }
+
+      if (animazioneMateriaInCorso) {
+        evento.preventDefault();
         return;
       }
 
