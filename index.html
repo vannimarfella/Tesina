@@ -96,50 +96,21 @@
       max-width: none;
       padding-right: max(20px, calc((100vw - 1320px) / 2 + 20px));
       padding-left: max(20px, calc((100vw - 1320px) / 2 + 20px));
-      display: grid;
-      grid-template-columns: 64px minmax(0, 1fr) 64px;
-      gap: 14px;
-      grid-template-rows: auto 1fr;
     }
 
     #mappa h2 {
-      grid-column: 1 / -1;
       color: var(--colore-blu-editoriale);
-    }
-
-    .mappa-nav-arrow {
-      align-self: center;
-      justify-self: center;
-    }
-
-    .mappa-nav-arrow--sinistra {
-      grid-column: 1;
-      grid-row: 2;
-      position: static;
-      left: auto;
-      transform: none;
-    }
-
-    .mappa-nav-arrow--destra {
-      grid-column: 3;
-      grid-row: 2;
-      position: static;
-      right: auto;
-      transform: none;
-    }
-
-    .mappa-nav-arrow:hover {
-      transform: scale(1.16);
     }
 
     .mappa-slide {
-      grid-column: 2;
-      grid-row: 2;
-      max-width: 100%;
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr) 64px;
+      gap: 14px;
+      align-items: center;
     }
 
-    #mappa h2 {
-      color: var(--colore-blu-editoriale);
+    .mappa-slide>.navigazione-freccia {
+      justify-self: center;
     }
 
     #conclusione h2 {
@@ -320,29 +291,6 @@
 
     .navigazione-laterale--destra {
       right: 20px;
-    }
-
-    .mappa-slide {
-      max-width: 100%;
-    }
-
-    .mappa-nav-arrow {
-      position: absolute;
-      top: 50%;
-      z-index: 4;
-      transform: translateY(-50%);
-    }
-
-    .mappa-nav-arrow--sinistra {
-      left: max(20px, calc((100vw - 1320px) / 2 + 20px));
-    }
-
-    .mappa-nav-arrow--destra {
-      right: max(20px, calc((100vw - 1320px) / 2 + 20px));
-    }
-
-    .mappa-nav-arrow:hover {
-      transform: translateY(-50%) scale(1.16);
     }
 
     .mappa-layout {
@@ -1187,17 +1135,16 @@
 
     @media (max-width: 620px) {
       #mappa.sezione {
-        display: flex;
-        flex-direction: column;
         padding-bottom: 96px;
       }
 
       .mappa-slide {
-        display: flex;
-        flex-direction: column;
         flex: 1;
-        gap: 12px;
         min-height: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr auto;
+        gap: 8px;
       }
 
       #mappa .legenda-mappa {
@@ -1210,30 +1157,26 @@
       }
 
       .mappa-slide>.mappa-layout {
-        flex: 1;
+        grid-column: 1 / -1;
+        grid-row: 1;
+        overflow-y: auto;
         min-height: 0;
       }
 
-      .mappa-nav-arrow {
-        position: absolute;
-        top: auto;
-        bottom: 24px;
-        z-index: 10;
-        transform: none;
+      .mappa-slide>.navigazione-freccia {
+        width: 54px;
+        height: 54px;
+        justify-self: center;
       }
 
-      .mappa-nav-arrow--sinistra {
-        left: 20px;
-        right: auto;
+      .mappa-slide>.navigazione-freccia:first-child {
+        grid-column: 1;
+        grid-row: 2;
       }
 
-      .mappa-nav-arrow--destra {
-        right: 20px;
-        left: auto;
-      }
-
-      .mappa-nav-arrow:hover {
-        transform: scale(1.16);
+      .mappa-slide>.navigazione-freccia:last-child {
+        grid-column: 2;
+        grid-row: 2;
       }
     }
 
@@ -1369,12 +1312,12 @@
 
     <section id="mappa" class="sezione">
       <h2>Mappa dei collegamenti</h2>
-      <a class="navigazione-freccia mappa-nav-arrow mappa-nav-arrow--sinistra" href="#introduzione" aria-label="Vai all'introduzione"
-        title="Vai all'introduzione">
-        <span aria-hidden="true">&larr;</span>
-        <span class="testo-navigazione">Introduzione</span>
-      </a>
       <div class="mappa-slide">
+        <a class="navigazione-freccia" href="#introduzione" aria-label="Vai all'introduzione"
+          title="Vai all'introduzione">
+          <span aria-hidden="true">&larr;</span>
+          <span class="testo-navigazione">Introduzione</span>
+        </a>
         <div class="mappa-layout">
           <aside class="legenda-mappa" aria-label="Legenda dei colori della mappa">
             <p class="legenda-titolo">Legenda</p>
@@ -1446,12 +1389,12 @@
             <a class="nodo-mappa nodo-12 gruppo-societa" href="#modal-religione">Religione</a>
           </div>
         </div>
+        <a class="navigazione-freccia" href="#conclusione" aria-label="Vai alla conclusione"
+          title="Vai alla conclusione">
+          <span aria-hidden="true">&rarr;</span>
+          <span class="testo-navigazione">Conclusione</span>
+        </a>
       </div>
-      <a class="navigazione-freccia mappa-nav-arrow mappa-nav-arrow--destra" href="#conclusione" aria-label="Vai alla conclusione"
-        title="Vai alla conclusione">
-        <span aria-hidden="true">&rarr;</span>
-        <span class="testo-navigazione">Conclusione</span>
-      </a>
     </section>
 
     <div id="modal-storia" class="modal">
