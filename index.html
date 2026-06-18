@@ -274,12 +274,24 @@
     .contenuto-con-immagine {
       display: grid;
       grid-template-columns: minmax(200px, 38%) 1fr;
-      gap: 12px;
+      gap: 6px;
       align-items: start;
     }
 
     .contenuto-con-immagine + .contenuto-con-immagine {
-      margin-top: 8px;
+      margin-top: 2px;
+    }
+
+    .contenuto-con-immagine--reverse {
+      grid-template-columns: 1fr minmax(200px, 38%);
+    }
+
+    .contenuto-con-immagine--reverse img {
+      grid-column: 2;
+    }
+
+    .contenuto-con-immagine--reverse > div {
+      grid-column: 1;
     }
 
     .immagine-testo {
@@ -340,7 +352,7 @@
     }
 
     .modal-box p+p {
-      margin-top: 14px;
+      margin-top: 8px;
     }
 
     .modal-box .etichetta-modal+p,
@@ -466,7 +478,7 @@
 
       .contenuto-con-immagine {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 8px;
       }
 
       .immagine-testo {
@@ -615,20 +627,21 @@
           <img class="immagine-testo immagine-orizzontale" src="immagini/storia/crollo-wall-street-1929.png"
             alt="Persone preoccupate davanti alla Borsa di Wall Street nel 1929">
           <div>
-            <p>Dopo la Prima Guerra Mondiale, gli Stati Uniti divennero la più grande potenza economica mondiale, vivendo negli anni '20 un periodo di enorme ricchezza e ottimismo (i "Ruggenti Anni Venti"). In questa atmosfera di benessere, tantissimi cittadini iniziarono a investire i propri risparmi nella borsa di Wall Street.
-
-Tuttavia, nel 1929 l'economia entrò in una crisi di sovrapproduzione: le industrie producevano più merci di quante la gente potesse comprarne. Il panico che ne seguì portò al crollo della borsa di Wall Street il 24 ottobre 1929 ("Giovedì Nero"). Questo disastro finanziario diede inizio alla Grande Depressione: le banche fallirono, le fabbriche chiusero e milioni di americani rimasero disoccupati.
-
-La ripresa arrivò nel 1932 con l'elezione del presidente Franklin D. Roosevelt, che lanciò il New Deal ("Nuovo Corso"). Con questo piano, lo Stato intervenne direttamente nell'economia finanziando grandi lavori pubblici per dare lavoro ai disoccupati, introducendo controlli sulle banche e creando riforme sociali per proteggere i cittadini, riuscendo così a risanare il Paese.
-              
-            </p>
-            <p>
-              <img class="immagine-testo immagine-orizzontale" src="immagini/storia/crush.png"
-                alt="Crollo della Borsa di Wall Street">
-			</p>
-			<p>
-              <img class="immagine-testo immagine-orizzontale" src="immagini/storia/ros.png" alt="Roosevelt">
-            </p>
+            <p>Dopo la Prima Guerra Mondiale, gli Stati Uniti divennero la più grande potenza economica mondiale, vivendo negli anni '20 un periodo di enorme ricchezza e ottimismo (i "Ruggenti Anni Venti"). In questa atmosfera di benessere, tantissimi cittadini iniziarono a investire i propri risparmi nella borsa di Wall Street.</p>
+          </div>
+        </div>
+        <div class="contenuto-con-immagine contenuto-con-immagine--reverse">
+          <div>
+            <p>Tuttavia, nel 1929 l'economia entrò in una crisi di sovrapproduzione: le industrie producevano più merci di quante la gente potesse comprarne. Il panico che ne seguì portò al crollo della borsa di Wall Street il 24 ottobre 1929 ("Giovedì Nero"). Questo disastro finanziario diede inizio alla Grande Depressione: le banche fallirono, le fabbriche chiusero e milioni di americani rimasero disoccupati.</p>
+            <p>La ripresa arrivò nel 1932 con l'elezione del presidente Franklin D. Roosevelt, che lanciò il New Deal ("Nuovo Corso"). Con questo piano, lo Stato intervenne direttamente nell'economia finanziando grandi lavori pubblici per dare lavoro ai disoccupati, introducendo controlli sulle banche e creando riforme sociali per proteggere i cittadini, riuscendo così a risanare il Paese.</p>
+            <p>Il New Deal rappresenta un perfetto esempio di come l'intervento dello Stato possa risollevare un'economia in crisi, dimostrando il legame profondo tra politica, economia e storia.</p>
+          </div>
+          <img class="immagine-testo immagine-orizzontale" src="immagini/storia/image.png" alt="Immagine storia">
+        </div>
+        <div class="contenuto-con-immagine">
+          <img class="immagine-testo immagine-orizzontale" src="immagini/storia/popp.png" alt="Popp">
+          <div>
+            <p>Questa connessione tra economia e storia mostra come gli eventi finanziari abbiano plasmato il destino delle nazioni e delle persone.</p>
           </div>
         </div>
       </div>
@@ -639,12 +652,22 @@ La ripresa arrivò nel 1932 con l'elezione del presidente Franklin D. Roosevelt,
       <div class="modal-box modal-box-larga" role="dialog" aria-label="Geografia - Collegamento con Economia">
         <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
         <p class="etichetta-modal">Geografia - Collegamento con Economia</p>
-        <div class="contenuto-con-immagine">
+        <div class="contenuto-con-immagine" style="grid-template-columns: minmax(200px, 50%) 1fr;">
           <img class="immagine-testo immagine-orizzontale" src="immagini/geografia/bandiera%20america.png" alt="Bandiera americana">
           <div>
             <p>Gli Stati Uniti d'America sono una repubblica federale composta da 50 Stati. Sono il quarto Paese più grande del mondo e sono bagnati dall'Oceano Atlantico a est e dall'Oceano Pacifico a ovest. Questa posizione geografica è stata fondamentale per la loro economia: i due oceani hanno protetto l'America dai conflitti mondiali e hanno permesso di commerciare facilmente con l'Europa e con l'Asia.</p>
-            <p>La storia economica degli USA è iniziata con le tredici colonie inglesi, che nel 1776 dichiararono l'indipendenza con George Washington come primo presidente. Nel 1803 l'acquisto della Louisiana dalla Francia raddoppiò il territorio. L'economia crebbe grazie all'agricoltura del Sud (cotone, tabacco) e all'industrializzazione del Nord. Dopo la Guerra Civile (1861-1865) tra Nord e Sud, il presidente Abraham Lincoln abolì la schiavitù e unificò il Paese. <img class="immagine-testo immagine-orizzontale" src="immagini/geografia/abram.png" alt="Abraham Lincoln"></p>
+          </div>
+        </div>
+        <div class="contenuto-con-immagine contenuto-con-immagine--reverse" style="grid-template-columns: 1fr minmax(200px, 50%);">
+          <div>
+            <p>La storia economica degli USA è iniziata con le tredici colonie inglesi, che nel 1776 dichiararono l'indipendenza con George Washington come primo presidente. Nel 1803 l'acquisto della Louisiana dalla Francia raddoppiò il territorio. L'economia crebbe grazie all'agricoltura del Sud (cotone, tabacco) e all'industrializzazione del Nord. Dopo la Guerra Civile (1861-1865) tra Nord e Sud, il presidente Abraham Lincoln abolì la schiavitù e unificò il Paese.</p>
             <p>L'economia americana si divide in tre settori. Il settore primario comprende l'agricoltura (mais, grano, soia), l'allevamento e l'estrazione di petrolio, carbone e gas naturale. Il settore secondario è l'industria: acciaio, automobili, aerei, elettronica e prodotti chimici. Grandi aziende come Ford e General Electric sono nate qui. Il settore terziario è il più importante e include banche, assicurazioni, commercio, turismo e servizi. Oggi la Silicon Valley in California è il centro mondiale della tecnologia, con aziende come Apple, Google e Microsoft.</p>
+          </div>
+          <img class="immagine-testo immagine-orizzontale" src="immagini/geografia/geo.png" alt="Mappa USA">
+        </div>
+        <div class="contenuto-con-immagine" style="grid-template-columns: minmax(200px, 50%) 1fr;">
+          <img class="immagine-testo immagine-orizzontale" src="immagini/geografia/abram.png" alt="Abraham Lincoln">
+          <div>
             <p>Nel Novecento gli USA sono diventati la prima potenza economica mondiale. Dopo la crisi del 1929, il presidente Franklin D. Roosevelt lanciò il New Deal per far ripartire l'economia. Durante la Guerra Fredda, presidenti come John F. Kennedy e Ronald Reagan guidarono il Paese in un periodo di crescita. Oggi gli Stati Uniti hanno il PIL più alto del mondo e la loro economia influenza tutti gli altri Paesi, dimostrando il legame strettissimo tra geografia, storia ed economia.</p>
           </div>
         </div>
@@ -711,16 +734,12 @@ La ripresa arrivò nel 1932 con l'elezione del presidente Franklin D. Roosevelt,
       <div class="modal-box modal-box-larga" role="dialog" aria-label="Inglese - Collegamento con Economia">
         <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
         <p class="etichetta-modal">Inglese - The Marshall Plan</p>
-        <div class="contenuto-con-immagine">
-          <img class="immagine-testo immagine-orizzontale" src="immagini/inglese/marhallplane.png" alt="Marshall Plane">
-          <div>
-            <p>The Marshall Plan was a big economic help program. After World War II, Europe was in very bad condition. Many cities were destroyed by bombs. Factories were broken. Roads and railways were damaged. Many people did not have food, a house, or a job. The situation was very difficult for everyone.</p>
-            <p>In 1947, an American politician named George C. Marshall had an idea. He wanted to help Europe rebuild. The United States gave a lot of money to European countries. This money was called the Marshall Plan or the European Recovery Program. From 1948 to 1951, the USA gave about 13 billion dollars. Today, that is more than 140 billion dollars.</p>
-            <p>Sixteen countries received this help. Italy, France, Germany, and the United Kingdom were some of them. The countries used the money to rebuild roads, railways, bridges, and schools. They also bought new machines for factories and farms. Farmers got better tools to grow more food. Workers built new power plants to have electricity again.</p>
-            <p>The countries had to work together. They formed a group called the OEEC. This group helped them cooperate and share ideas. This was very important because it created peace between European countries. After the war, many countries were enemies. The Marshall Plan helped them become friends and work together for a better future.</p>
-            <p>The results were very good. In 1952, factories in Europe produced 35% more than before the war. People found jobs again. Families could buy food and clothes. Children went back to school. The economy grew and grew. The Marshall Plan is a very good example of how money and cooperation can change the world. It shows that when countries help each other, everybody wins. This is why I chose this topic for my economy project.</p>
-          </div>
-        </div>
+        <img class="immagine-testo immagine-orizzontale" src="immagini/inglese/mp2.png" alt="Marshall Plane" style="margin-bottom: 10px; width: 90%;">
+        <p>The Marshall Plan was a big economic help program. After World War II, Europe was in very bad condition. Many cities were destroyed by bombs. Factories were broken. Roads and railways were damaged. Many people did not have food, a house, or a job. The situation was very difficult for everyone.</p>
+        <p>In 1947, an American politician named George C. Marshall had an idea. He wanted to help Europe rebuild. The United States gave a lot of money to European countries. This money was called the Marshall Plan or the European Recovery Program. <img class="immagine-testo immagine-orizzontale" src="immagini/inglese/reco.png" alt="European Recovery Program"> From 1948 to 1951, the USA gave about 13 billion dollars. Today, that is more than 140 billion dollars.</p>
+        <p>Sixteen countries received this help. Italy, France, Germany, and the United Kingdom were some of them. The countries used the money to rebuild roads, railways, bridges, and schools. They also bought new machines for factories and farms. Farmers got better tools to grow more food. Workers built new power plants to have electricity again.</p>
+        <p>The countries had to work together. They formed a group called the OEEC. This group helped them cooperate and share ideas. This was very important because it created peace between European countries. After the war, many countries were enemies. The Marshall Plan helped them become friends and work together for a better future.</p>
+        <p>The results were very good. In 1952, factories in Europe produced 35% more than before the war. People found jobs again. Families could buy food and clothes. Children went back to school. The economy grew and grew. The Marshall Plan is a very good example of how money and cooperation can change the world. It shows that when countries help each other, everybody wins. This is why I chose this topic for my economy project.</p>
       </div>
     </div>
 
