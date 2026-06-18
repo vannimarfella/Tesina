@@ -11,11 +11,15 @@
     }
 
     html {
+      height: 100%;
+      overflow: hidden;
       scroll-behavior: smooth;
     }
 
     body {
+      height: 100%;
       margin: 0;
+      overflow: hidden;
       font-family: Arial, Helvetica, sans-serif;
       color: #1f2933;
       background:
@@ -38,18 +42,24 @@
     }
 
     main {
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
+      scroll-behavior: smooth;
       background: rgba(245, 247, 250, 0.88);
     }
 
     .sezione {
       max-width: 1100px;
       margin: 0 auto;
+      height: 100vh;
       min-height: 100vh;
       padding: 32px 20px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      justify-content: safe center;
     }
 
     #mappa.sezione {
@@ -370,17 +380,25 @@
     }
 
     .modal {
-      display: none;
+      display: flex;
       position: fixed;
       inset: 0;
       z-index: 10;
       padding: 28px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
       align-items: center;
       justify-content: center;
+      transition: opacity 0.5s ease, visibility 0s linear 0.5s;
     }
 
-    .modal:target {
-      display: flex;
+    .modal:target,
+    .modal.modal-attiva {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 0s;
     }
 
     .modal-sfondo {
@@ -400,6 +418,15 @@
       border-radius: 8px;
       background: white;
       box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+      opacity: 0;
+      transform: translateY(14px) scale(0.972);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .modal:target .modal-box,
+    .modal.modal-attiva .modal-box {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
 
     .modal-box-larga {
@@ -493,6 +520,108 @@
     .modal-box .etichetta-modal+p,
     .modal-box .etichetta-modal+.contenuto-con-immagine {
       margin-top: 34px;
+    }
+
+    .riferimenti-intro {
+      max-width: 780px;
+      margin: 0 auto 26px;
+      text-align: center;
+    }
+
+    .link-riferimenti {
+      color: #0b1f3a;
+      font-weight: bold;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .link-riferimenti:hover {
+      color: #12345a;
+    }
+
+    .lista-riferimenti {
+      width: min(860px, 100%);
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid #cfd9e5;
+    }
+
+    .lista-riferimenti li {
+      padding: 14px 0;
+      border-bottom: 1px solid #cfd9e5;
+    }
+
+    .lista-riferimenti a {
+      color: #0b1f3a;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .lista-riferimenti a:hover {
+      color: #12345a;
+      text-decoration: underline;
+    }
+
+    .nota-riferimento {
+      display: block;
+      margin-top: 4px;
+      color: #526173;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .riferimenti-modale {
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid #dbe3ea;
+    }
+
+    .riferimenti-modale-titolo {
+      margin: 0 0 8px;
+      color: #0b1f3a;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .riferimenti-modale a {
+      display: inline-block;
+      margin-right: 12px;
+      color: #0b1f3a;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .riferimenti-modale a:hover {
+      color: #12345a;
+    }
+
+    .modal-box p.riferimenti-intro {
+      max-width: none;
+      margin: 0 0 18px;
+      text-align: left;
+    }
+
+    .modal-box .etichetta-modal+.riferimenti-intro {
+      margin-top: 28px;
+    }
+
+    .modal-box .lista-riferimenti {
+      width: 100%;
+    }
+
+    .modal-box .lista-riferimenti li {
+      padding: 11px 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .modal,
+      .modal-box {
+        transition: none;
+      }
     }
 
     @media (min-width: 801px) and (max-height: 860px) {
@@ -679,7 +808,8 @@
       }
 
       .sezione {
-        min-height: auto;
+        height: 100vh;
+        min-height: 100vh;
         padding: 48px 18px;
       }
     }
@@ -867,6 +997,10 @@
             <p>Questa connessione tra economia e storia mostra come gli eventi finanziari abbiano plasmato il destino delle nazioni e delle persone.</p>
           </div>
         </div>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.federalreservehistory.org/essays/stock-market-crash-of-1929" target="_blank" rel="noopener noreferrer">Federal Reserve History - Crollo del 1929</a>
+        </div>
       </div>
     </div>
 
@@ -894,6 +1028,10 @@
             <p>Nel Novecento gli USA sono diventati la prima potenza economica mondiale. Dopo la crisi del 1929, il presidente Franklin D. Roosevelt lanciò il New Deal per far ripartire l'economia. Durante la Guerra Fredda, presidenti come John F. Kennedy e Ronald Reagan guidarono il Paese in un periodo di crescita. Oggi gli Stati Uniti hanno il PIL più alto del mondo e la loro economia influenza tutti gli altri Paesi, dimostrando il legame strettissimo tra geografia, storia ed economia.</p>
           </div>
         </div>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.britannica.com/place/United-States" target="_blank" rel="noopener noreferrer">Britannica - United States</a>
+        </div>
       </div>
     </div>
 
@@ -917,6 +1055,10 @@
               le condizioni di vita, le disuguaglianze e la dignità delle persone.
             </p>
           </div>
+        </div>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.treccani.it/enciclopedia/verismo_%28Enciclopedia-dei-ragazzi%29/" target="_blank" rel="noopener noreferrer">Treccani - Verismo</a>
         </div>
       </div>
     </div>
@@ -949,6 +1091,11 @@
             <p>Le scoperte su Plutone hanno un importante legame con l'economia. La missione New Horizons è costata circa 720 milioni di dollari, una cifra che può sembrare enorme ma che ha generato un indotto economico significativo: migliaia di posti di lavoro tra ingegneri, scienziati e tecnici, innovazioni tecnologiche poi riutilizzate in campo medico e industriale, e un enorme ritorno in termini di conoscenza. L'esplorazione spaziale, inoltre, è oggi un settore economico in forte crescita, con aziende private che investono miliardi e creano nuove opportunità di lavoro e sviluppo tecnologico.</p>
           </div>
         </div>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://science.nasa.gov/mission/new-horizons/" target="_blank" rel="noopener noreferrer">NASA Science - New Horizons</a>
+          <a href="https://science.nasa.gov/dwarf-planets/pluto/" target="_blank" rel="noopener noreferrer">NASA Science - Pluto</a>
+        </div>
       </div>
     </div>
 
@@ -963,6 +1110,11 @@
         <p>Sixteen countries received this help. Italy, France, Germany, and the United Kingdom were some of them. The countries used the money to rebuild roads, railways, bridges, and schools. They also bought new machines for factories and farms. Farmers got better tools to grow more food. Workers built new power plants to have electricity again.</p>
         <p>The countries had to work together. They formed a group called the OEEC. This group helped them cooperate and share ideas. This was very important because it created peace between European countries. After the war, many countries were enemies. The Marshall Plan helped them become friends and work together for a better future.</p>
         <p>The results were very good. In 1952, factories in Europe produced 35% more than before the war. People found jobs again. Families could buy food and clothes. Children went back to school. The economy grew and grew. The Marshall Plan is a very good example of how money and cooperation can change the world. It shows that when countries help each other, everybody wins. This is why I chose this topic for my economy project.</p>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.archives.gov/milestone-documents/marshall-plan" target="_blank" rel="noopener noreferrer">National Archives - Marshall Plan</a>
+          <a href="https://www.trumanlibrary.gov/library/online-collections/truman-marshall-plan" target="_blank" rel="noopener noreferrer">Truman Library - Marshall Plan</a>
+        </div>
       </div>
     </div>
 
@@ -978,6 +1130,11 @@
             <p>Durante la guerra, la economía se militarizó y se dividió por completo: el bando republicano perdió casi todas sus reservas financieras (el famoso "Oro de Moscú") para comprar armas a la Unión Soviética, mientras que el bando nacionalista de Francisco Franco obtuvo enormes líneas de crédito y suministros de Italia y Alemania. Con la victoria de Franco en 1939, la economía española estaba devastada. <img class="immagine-testo immagine-orizzontale" src="immagini/spagnolo/fine_guerra_civile_spagnola.png" alt="Fine della Guerra Civil Española"> El nuevo régimen dictatorial impuso la <strong>autarquía</strong>, un modelo económico de autosuficiencia que buscaba aislar a España de los mercados internacionales.</p>
             <p>Esta decisión, unida a la destrucción de infraestructuras y fábricas por los bombardeos, causó una gravísima recesión: durante más de una década España sufrió una dramática escasez de alimentos y materias primas, lo que obligó al Estado a introducir el racionamiento de los bienes de primera necesidad y alimentó un enorme mercado negro (conocido como <em>estraperlo</em>). En conclusión, la guerra civil española representa un claro ejemplo de cómo las injusticias económicas pueden desatar un conflicto y cómo las políticas aislacionistas posteriores a la guerra pueden condenar a un país a décadas de pobreza.</p>
           </div>
+        </div>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.britannica.com/event/Spanish-Civil-War" target="_blank" rel="noopener noreferrer">Britannica - Spanish Civil War</a>
+          <a href="https://www.treccani.it/enciclopedia/la-guerra-di-spagna_%28Storia-della-civilt%C3%A0-europea-a-cura-di-Umberto-Eco%29/" target="_blank" rel="noopener noreferrer">Treccani - Guerra di Spagna</a>
         </div>
       </div>
     </div>
@@ -996,6 +1153,11 @@
           Oggi la tecnologia rende la produzione più veloce, ma cambia anche
           il mondo del lavoro e richiede nuove competenze.
         </p>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.treccani.it/enciclopedia/produzione_%28Enciclopedia-dei-ragazzi%29/" target="_blank" rel="noopener noreferrer">Treccani - Produzione</a>
+          <a href="https://www.treccani.it/enciclopedia/tecnologia/" target="_blank" rel="noopener noreferrer">Treccani - Tecnologia</a>
+        </div>
       </div>
     </div>
 
@@ -1010,6 +1172,11 @@
             <p>In arte ho scelto la Pop Art, un movimento nato in America e in Inghilterra, e il suo impatto sull'economia italiana. Negli anni Sessanta, l'Italia visse il suo "miracolo economico", un periodo di forte industrializzazione che trasformò il Paese in una società del benessere e dei consumi di massa. In questo clima di cambiamento arrivò dagli Stati Uniti la Pop Art, che gli artisti italiani rielaborarono legandola alla nostra tradizione culturale. Questo movimento influenzò profondamente l'economia e ne fu, al tempo stesso, lo specchio. Artisti come Mario Schifano portarono nelle loro opere i nuovi simboli del boom, come i loghi pubblicitari della Coca-Cola o della Esso, trasformando i prodotti commerciali in arte. Questa tendenza modificò radicalmente il mercato artistico, poiché le opere iniziarono a essere prodotte più rapidamente, con materiali industriali ed economici, diventando esse stesse beni di consumo accessibili a un pubblico più ampio. Si creò così un legame strettissimo tra arte e industria: se da un lato i pittori si ispiravano ai prodotti dei supermercati, dall'altro le grandi aziende italiane di moda e design iniziarono a copiare i colori accesi e lo stile della Pop Art per pubblicizzare e vendere le proprie merci, dimostrando come l'economia potesse plasmare la cultura del tempo.</p>
             <p>Ho deciso di portare uno dei massimi esponenti della Pop Art italiana e mondiale, ovvero Tano Festa (1938-1988), figura chiave della celebre "Scuola di Piazza del Popolo" a Roma. Formatosi inizialmente come fotografo artistico, nei primi anni Sessanta avviò la sua carriera isolando oggetti quotidiani in legno, come porte, finestre e persiane, che dipingeva interamente con smalti industriali per privarli della loro funzione comune e trasformarli in veri e propri quadri-scultura. La sua intuizione più celebre e geniale arrivò però tra il 1963 e il 1964, in pieno miracolo economico: mentre gli artisti americani come Andy Warhol celebravano i prodotti dei supermercati o i divi di Hollywood, Festa capì che in Italia il vero "bene di largo consumo" e l'icona popolare per eccellenza era l'arte classica e rinascimentale, con cui i cittadini convivevano da secoli. Nacque così la sua famosissima serie "Omaggio a Michelangelo" (di cui fa parte l'opera L'Eden), in cui proiettava sulla tela le fotografie di capolavori come gli affreschi della Cappella Sistina, ridisegnandone i contorni con tinte piatte, accese e artificiali. Attraverso questo metodo innovativo, Festa dimostrò come i capolavori del passato potessero essere desacralizzati e reinterpretati come moderni manifesti pubblicitari, inserendosi perfettamente nei meccanismi visivi e commerciali della nuova società dei consumi.</p>
           </div>
+        </div>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.tate.org.uk/art/art-terms/p/pop-art/think-you-know-pop-art" target="_blank" rel="noopener noreferrer">Tate - Pop Art</a>
+          <a href="https://www.treccani.it/enciclopedia/gaetano-festa_%28Dizionario-Biografico%29/" target="_blank" rel="noopener noreferrer">Treccani - Tano Festa</a>
         </div>
       </div>
     </div>
@@ -1028,6 +1195,11 @@
           Lo sport non è solo attività fisica, ma anche lavoro e organizzazione
           economica.
         </p>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.treccani.it/enciclopedia/l-economia-dello-sport-nella-societa-moderna_%28Enciclopedia-dello-Sport%29/" target="_blank" rel="noopener noreferrer">Treccani - Economia dello sport</a>
+          <a href="https://www.wipo.int/en/web/wipo-magazine/articles/sport-and-broadcasting-rights-adding-value-38430" target="_blank" rel="noopener noreferrer">WIPO - Diritti sportivi e valore economico</a>
+        </div>
       </div>
     </div>
 
@@ -1045,6 +1217,11 @@
           Pagare le tasse serve anche a finanziare servizi pubblici come scuola,
           sanità, trasporti e sicurezza.
         </p>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.senato.it/istituzione/la-costituzione/principi-fondamentali/articolo-1" target="_blank" rel="noopener noreferrer">Senato - Articolo 1</a>
+          <a href="https://www.senato.it/node/150/printable/print" target="_blank" rel="noopener noreferrer">Senato - Articolo 53</a>
+        </div>
       </div>
     </div>
 
@@ -1061,6 +1238,10 @@
           Le strade romane aiutavano gli scambi economici e permettevano di
           collegare città e territori dell'Impero.
         </p>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.britannica.com/place/Roman-Empire" target="_blank" rel="noopener noreferrer">Britannica - Roman Empire</a>
+        </div>
       </div>
     </div>
 
@@ -1078,6 +1259,145 @@
           Questo collegamento aiuta a riflettere su povertà, solidarietà,
           lavoro dignitoso e uso responsabile delle ricchezze.
         </p>
+        <div class="riferimenti-modale">
+          <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.vatican.va/roman_curia/pontifical_councils/justpeace/documents/rc_pc_justpeace_doc_20060526_compendio-dott-soc_it.html" target="_blank" rel="noopener noreferrer">Vaticano - Dottrina sociale della Chiesa</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-riferimenti" class="modal">
+      <a class="modal-sfondo" href="#conclusione" aria-label="Chiudi modale"></a>
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Riferimenti online consultati">
+        <a class="chiudi-modal" href="#conclusione" aria-label="Chiudi">&times;</a>
+        <p class="etichetta-modal">Riferimenti online consultati</p>
+        <p class="riferimenti-intro">
+          Per realizzare i collegamenti della tesina ho consultato risorse online
+          affidabili, utili per verificare date, eventi storici, argomenti
+          scientifici e riferimenti culturali.
+        </p>
+        <ul class="lista-riferimenti">
+          <li>
+            <a href="https://www.treccani.it/enciclopedia/economia/" target="_blank" rel="noopener noreferrer">
+              Treccani - Economia
+            </a>
+            <span class="nota-riferimento">Definizione generale di economia e risorse economiche.</span>
+          </li>
+          <li>
+            <a href="https://www.federalreservehistory.org/essays/stock-market-crash-of-1929" target="_blank" rel="noopener noreferrer">
+              Federal Reserve History - Stock Market Crash of 1929
+            </a>
+            <span class="nota-riferimento">Approfondimento sul crollo della Borsa del 1929.</span>
+          </li>
+          <li>
+            <a href="https://www.britannica.com/place/United-States" target="_blank" rel="noopener noreferrer">
+              Britannica - United States
+            </a>
+            <span class="nota-riferimento">Informazioni su geografia, storia ed economia degli Stati Uniti.</span>
+          </li>
+          <li>
+            <a href="https://www.treccani.it/enciclopedia/verismo_%28Enciclopedia-dei-ragazzi%29/" target="_blank" rel="noopener noreferrer">
+              Treccani - Verismo
+            </a>
+            <span class="nota-riferimento">Collegamento tra letteratura verista, lavoro e condizioni sociali.</span>
+          </li>
+          <li>
+            <a href="https://science.nasa.gov/mission/new-horizons/" target="_blank" rel="noopener noreferrer">
+              NASA Science - New Horizons
+            </a>
+            <span class="nota-riferimento">Missione spaziale New Horizons e sorvolo di Plutone.</span>
+          </li>
+          <li>
+            <a href="https://science.nasa.gov/dwarf-planets/pluto/" target="_blank" rel="noopener noreferrer">
+              NASA Science - Pluto
+            </a>
+            <span class="nota-riferimento">Dati e informazioni scientifiche sul pianeta nano Plutone.</span>
+          </li>
+          <li>
+            <a href="https://www.archives.gov/milestone-documents/marshall-plan" target="_blank" rel="noopener noreferrer">
+              National Archives - Marshall Plan
+            </a>
+            <span class="nota-riferimento">Documenti e sintesi sul Piano Marshall.</span>
+          </li>
+          <li>
+            <a href="https://www.trumanlibrary.gov/library/online-collections/truman-marshall-plan" target="_blank" rel="noopener noreferrer">
+              Truman Library - Marshall Plan
+            </a>
+            <span class="nota-riferimento">Raccolta storica sul Piano Marshall e sulla ricostruzione europea.</span>
+          </li>
+          <li>
+            <a href="https://www.britannica.com/event/Spanish-Civil-War" target="_blank" rel="noopener noreferrer">
+              Britannica - Spanish Civil War
+            </a>
+            <span class="nota-riferimento">Cause, sviluppo e conseguenze della Guerra civile spagnola.</span>
+          </li>
+          <li>
+            <a href="https://www.treccani.it/enciclopedia/la-guerra-di-spagna_%28Storia-della-civilt%C3%A0-europea-a-cura-di-Umberto-Eco%29/" target="_blank" rel="noopener noreferrer">
+              Treccani - Guerra di Spagna
+            </a>
+            <span class="nota-riferimento">Approfondimento storico in italiano sulla Guerra civile spagnola.</span>
+          </li>
+          <li>
+            <a href="https://www.treccani.it/enciclopedia/produzione_%28Enciclopedia-dei-ragazzi%29/" target="_blank" rel="noopener noreferrer">
+              Treccani - Produzione
+            </a>
+            <span class="nota-riferimento">Definizione di produzione e rapporto con materie prime, lavoro e strumenti.</span>
+          </li>
+          <li>
+            <a href="https://www.treccani.it/enciclopedia/tecnologia/" target="_blank" rel="noopener noreferrer">
+              Treccani - Tecnologia
+            </a>
+            <span class="nota-riferimento">Riferimento generale sul concetto di tecnologia.</span>
+          </li>
+          <li>
+            <a href="https://www.tate.org.uk/art/art-terms/p/pop-art/think-you-know-pop-art" target="_blank" rel="noopener noreferrer">
+              Tate - Pop Art
+            </a>
+            <span class="nota-riferimento">Introduzione al movimento della Pop Art.</span>
+          </li>
+          <li>
+            <a href="https://www.treccani.it/enciclopedia/gaetano-festa_%28Dizionario-Biografico%29/" target="_blank" rel="noopener noreferrer">
+              Treccani - Tano Festa
+            </a>
+            <span class="nota-riferimento">Scheda biografica sull'artista Tano Festa.</span>
+          </li>
+          <li>
+            <a href="https://www.treccani.it/enciclopedia/l-economia-dello-sport-nella-societa-moderna_%28Enciclopedia-dello-Sport%29/" target="_blank" rel="noopener noreferrer">
+              Treccani - Economia dello sport
+            </a>
+            <span class="nota-riferimento">Approfondimento sull'impatto economico dello sport moderno.</span>
+          </li>
+          <li>
+            <a href="https://www.wipo.int/en/web/wipo-magazine/articles/sport-and-broadcasting-rights-adding-value-38430" target="_blank" rel="noopener noreferrer">
+              WIPO - Sport e diritti televisivi
+            </a>
+            <span class="nota-riferimento">Collegamento tra sport, media, diritti e valore economico.</span>
+          </li>
+          <li>
+            <a href="https://www.senato.it/istituzione/la-costituzione/principi-fondamentali/articolo-1" target="_blank" rel="noopener noreferrer">
+              Senato della Repubblica - Articolo 1 della Costituzione
+            </a>
+            <span class="nota-riferimento">Riferimento al lavoro come fondamento della Repubblica.</span>
+          </li>
+          <li>
+            <a href="https://www.senato.it/node/150/printable/print" target="_blank" rel="noopener noreferrer">
+              Senato della Repubblica - Articolo 53 della Costituzione
+            </a>
+            <span class="nota-riferimento">Riferimento alle tasse e alla capacità contributiva.</span>
+          </li>
+          <li>
+            <a href="https://www.britannica.com/place/Roman-Empire" target="_blank" rel="noopener noreferrer">
+              Britannica - Roman Empire
+            </a>
+            <span class="nota-riferimento">Contesto storico sull'Impero romano, commercio e infrastrutture.</span>
+          </li>
+          <li>
+            <a href="https://www.vatican.va/roman_curia/pontifical_councils/justpeace/documents/rc_pc_justpeace_doc_20060526_compendio-dott-soc_it.html" target="_blank" rel="noopener noreferrer">
+              Vaticano - Dottrina sociale della Chiesa
+            </a>
+            <span class="nota-riferimento">Riferimento su lavoro, giustizia sociale, solidarieta e bene comune.</span>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -1087,7 +1407,8 @@
         L'economia aiuta a capire meglio il mondo in cui viviamo. Ogni scelta
         economica può avere conseguenze sulle persone, sull'ambiente e sulla
         società. Per questo è importante imparare a consumare e scegliere in modo
-        responsabile.
+        responsabile. Le fonti online consultate sono raccolte nei
+        <a class="link-riferimenti" href="#modal-riferimenti">riferimenti</a>.
       </p>
       <div class="azioni-sezione">
         <a class="bottone-sezione" href="#introduzione">Torna all'introduzione</a>
@@ -1096,12 +1417,90 @@
   </main>
 
   <script>
-    function aggiornaStatoModale() {
-      document.body.classList.toggle("modale-aperta", window.location.hash.startsWith("#modal-"));
+    const contenitorePrincipale = document.querySelector("main");
+    const sezioniPrincipali = ["introduzione", "mappa", "conclusione"];
+
+    function sezioneDaHash(hash) {
+      if (!hash || hash === "#") {
+        return "introduzione";
+      }
+
+      if (hash === "#modal-riferimenti") {
+        return "conclusione";
+      }
+
+      if (hash.startsWith("#modal-")) {
+        return "mappa";
+      }
+
+      const id = hash.slice(1);
+      return sezioniPrincipali.includes(id) ? id : "introduzione";
     }
 
-    window.addEventListener("hashchange", aggiornaStatoModale);
-    aggiornaStatoModale();
+    function vaiAllaSezione(id, comportamento = "smooth") {
+      const sezione = document.getElementById(id);
+
+      if (!sezione || !contenitorePrincipale) {
+        return;
+      }
+
+      contenitorePrincipale.scrollTo({
+        top: sezione.offsetTop,
+        behavior: comportamento
+      });
+    }
+
+    function aggiornaStatoModale(comportamento = "smooth") {
+      const hash = window.location.hash || "#introduzione";
+      const modaleAperta = hash.startsWith("#modal-");
+
+      document.body.classList.toggle("modale-aperta", modaleAperta);
+      document.querySelectorAll(".modal-attiva").forEach(function (modale) {
+        modale.classList.remove("modal-attiva");
+      });
+
+      if (modaleAperta) {
+        const modale = document.getElementById(hash.slice(1));
+
+        if (modale && modale.classList.contains("modal")) {
+          modale.classList.add("modal-attiva");
+        }
+      }
+
+      vaiAllaSezione(sezioneDaHash(hash), comportamento);
+    }
+
+    document.addEventListener("click", function (evento) {
+      const link = evento.target.closest('a[href^="#"]');
+
+      if (!link) {
+        return;
+      }
+
+      const hash = link.getAttribute("href");
+      const destinazione = hash ? document.getElementById(hash.slice(1)) : null;
+
+      if (!hash || hash === "#" || !destinazione) {
+        return;
+      }
+
+      evento.preventDefault();
+      history.pushState(null, "", hash);
+      aggiornaStatoModale();
+    });
+
+    window.addEventListener("popstate", function () {
+      aggiornaStatoModale();
+    });
+
+    window.addEventListener("resize", function () {
+      vaiAllaSezione(sezioneDaHash(window.location.hash), "auto");
+    });
+
+    window.addEventListener("hashchange", function () {
+      aggiornaStatoModale();
+    });
+    aggiornaStatoModale("auto");
   </script>
 
 </body>
