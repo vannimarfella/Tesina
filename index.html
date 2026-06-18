@@ -52,6 +52,10 @@
       justify-content: center;
     }
 
+    #mappa.sezione {
+      max-width: 1320px;
+    }
+
     h2 {
       margin: 0 0 18px;
       font-size: 32px;
@@ -86,16 +90,82 @@
       background: #12345a;
     }
 
+    .mappa-layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .legenda-mappa {
+      padding: 18px;
+      border: 1px solid #dbe3ea;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .legenda-titolo {
+      margin: 0 0 12px;
+      color: #0b1f3a;
+      font-size: 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .voce-legenda {
+      --nodo-bg: #eaf2ff;
+      --nodo-bg-2: #f7fbff;
+      --nodo-border: #bfdbfe;
+      --nodo-accent: #2563eb;
+      padding: 12px 0;
+      border-top: 1px solid #e6edf5;
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .voce-legenda::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      margin-top: 3px;
+      border: 2px solid var(--nodo-border);
+      border-radius: 5px;
+      background: linear-gradient(135deg, var(--nodo-bg), var(--nodo-bg-2));
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.58);
+    }
+
+    .nome-legenda {
+      margin: 0 0 3px;
+      color: #0b1f3a;
+      font-size: 13px;
+      font-weight: bold;
+      line-height: 1.25;
+    }
+
+    .descrizione-legenda {
+      margin: 0;
+      color: #526173;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
     .mappa-concettuale {
-      min-height: 640px;
+      min-height: 620px;
       position: relative;
       border: 1px solid #dbe3ea;
       border-radius: 16px;
       background:
-        radial-gradient(ellipse at 50% 50%, rgba(191, 219, 254, 0.15), transparent 70%),
+        linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(255, 255, 255, 0.98)),
+        radial-gradient(ellipse at 50% 50%, rgba(191, 219, 254, 0.12), transparent 70%),
         white;
       overflow: hidden;
-      box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
     }
 
     .frecce-mappa {
@@ -107,27 +177,32 @@
     }
 
     .frecce-mappa line {
-      stroke: #94a3b8;
-      stroke-width: 2;
-      stroke-dasharray: 6 4;
+      stroke: #9aaabd;
+      stroke-width: 2.2;
+      stroke-dasharray: 7 5;
       marker-end: url(#punta-freccia);
-      opacity: 0.6;
+      opacity: 0.72;
     }
 
     .frecce-mappa path {
-      fill: #94a3b8;
+      fill: #9aaabd;
     }
 
     .nodo-mappa {
+      --nodo-bg: #eaf2ff;
+      --nodo-bg-2: #f7fbff;
+      --nodo-border: #bfdbfe;
+      --nodo-accent: #2563eb;
       width: 150px;
       min-height: 58px;
       padding: 12px;
       position: absolute;
-      border: 2px solid #bfdbfe;
+      border: 2px solid var(--nodo-border);
       border-radius: 12px;
-      background: linear-gradient(135deg, #eaf2ff, #f0f6ff);
+      background:
+        linear-gradient(135deg, var(--nodo-bg), var(--nodo-bg-2));
       color: #0b1f3a;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 7px 18px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -135,16 +210,69 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 14px;
+      cursor: pointer;
       transform: translate(-50%, -50%);
-      transition: all 0.25s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .nodo-mappa:not(.nodo-centro)::after {
+      content: "";
+      width: 34px;
+      height: 3px;
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      border-radius: 999px;
+      background: var(--nodo-accent);
+      opacity: 0.62;
     }
 
     .nodo-mappa:hover {
-      border-color: #0b1f3a;
+      border-color: var(--nodo-accent);
       color: #0b1f3a;
-      background: linear-gradient(135deg, #dbeafe, #e8f0ff);
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.06);
-      transform: translate(-50%, -50%) scale(1.06);
+      background: linear-gradient(135deg, var(--nodo-bg-2), #ffffff);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16), 0 2px 6px rgba(15, 23, 42, 0.06);
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    .nodo-mappa:focus-visible {
+      outline: 3px solid rgba(11, 31, 58, 0.26);
+      outline-offset: 4px;
+    }
+
+    .gruppo-umanistica {
+      --nodo-bg: #fff1f2;
+      --nodo-bg-2: #fff8f8;
+      --nodo-border: #fecdd3;
+      --nodo-accent: #be123c;
+    }
+
+    .gruppo-territorio {
+      --nodo-bg: #ecfdf5;
+      --nodo-bg-2: #f7fffb;
+      --nodo-border: #a7f3d0;
+      --nodo-accent: #047857;
+    }
+
+    .gruppo-scientifica {
+      --nodo-bg: #eef7ff;
+      --nodo-bg-2: #f8fcff;
+      --nodo-border: #bae6fd;
+      --nodo-accent: #0369a1;
+    }
+
+    .gruppo-lingue {
+      --nodo-bg: #fff7ed;
+      --nodo-bg-2: #fffaf3;
+      --nodo-border: #fed7aa;
+      --nodo-accent: #c2410c;
+    }
+
+    .gruppo-societa {
+      --nodo-bg: #f0fdfa;
+      --nodo-bg-2: #f8fffd;
+      --nodo-border: #99f6e4;
+      --nodo-accent: #0f766e;
     }
 
     .nodo-centro {
@@ -175,63 +303,70 @@
     }
 
     .nodo-1 {
-      left: 18%;
+      left: 20%;
       top: 11%;
     }
 
     .nodo-2 {
-      left: 38%;
+      left: 39%;
       top: 11%;
     }
 
     .nodo-3 {
-      left: 62%;
+      left: 61%;
       top: 11%;
     }
 
     .nodo-4 {
-      left: 82%;
+      left: 80%;
       top: 11%;
     }
 
     .nodo-5 {
-      left: 8%;
+      left: 12%;
       top: 36%;
     }
 
     .nodo-6 {
-      left: 92%;
+      left: 88%;
       top: 36%;
     }
 
     .nodo-7 {
-      left: 8%;
+      left: 12%;
       top: 64%;
     }
 
     .nodo-8 {
-      left: 92%;
+      left: 88%;
       top: 64%;
     }
 
     .nodo-9 {
-      left: 18%;
+      left: 20%;
       top: 89%;
     }
 
     .nodo-10 {
-      left: 38%;
+      left: 39%;
       top: 89%;
     }
 
     .nodo-11 {
-      left: 62%;
+      left: 61%;
       top: 89%;
     }
 
     .nodo-12 {
-      left: 82%;
+      left: 80%;
       top: 89%;
+    }
+
+    #mappa .bottone-sezione {
+      padding: 10px 16px;
+      background: rgba(11, 31, 58, 0.92);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.1);
+      font-size: 15px;
     }
 
     .modal {
@@ -432,6 +567,54 @@
       }
     }
 
+    @media (max-width: 920px) {
+      .mappa-layout {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .legenda-mappa {
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(112px, 1fr));
+        gap: 8px;
+        overflow-x: auto;
+        justify-content: initial;
+      }
+
+      .legenda-titolo,
+      .descrizione-legenda {
+        display: none;
+      }
+
+      .voce-legenda {
+        min-width: 112px;
+        padding: 8px;
+        border: 1px solid #e6edf5;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.72);
+        display: flex;
+        align-items: center;
+      }
+
+      .voce-legenda::before {
+        flex: 0 0 auto;
+        margin-top: 0;
+      }
+
+      .nome-legenda {
+        margin: 0;
+        font-size: 12px;
+      }
+    }
+
+    @media (min-width: 801px) and (max-width: 920px) and (max-height: 860px) {
+      #mappa .mappa-concettuale {
+        height: min(620px, calc(100vh - 220px));
+        min-height: 0;
+      }
+    }
+
     @media (max-width: 800px) {
       .mappa-concettuale {
         min-height: auto;
@@ -461,6 +644,10 @@
         content: "→";
         margin-right: 10px;
         color: #0b1f3a;
+      }
+
+      .nodo-mappa:not(.nodo-centro)::after {
+        display: none;
       }
 
       .nodo-centro {
@@ -578,40 +765,76 @@
 
     <section id="mappa" class="sezione">
       <h2>Mappa dei collegamenti</h2>
-      <div class="mappa-concettuale">
-        <svg class="frecce-mappa" viewBox="0 0 1000 640" aria-hidden="true">
-          <defs>
-            <marker id="punta-freccia" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-              <path d="M 0 0 L 8 4 L 0 8 z" fill="#94a3b8"></path>
-            </marker>
-          </defs>
-          <line x1="500" y1="320" x2="180" y2="70"></line>
-          <line x1="500" y1="320" x2="380" y2="70"></line>
-          <line x1="500" y1="320" x2="620" y2="70"></line>
-          <line x1="500" y1="320" x2="820" y2="70"></line>
-          <line x1="500" y1="320" x2="80" y2="230"></line>
-          <line x1="500" y1="320" x2="920" y2="230"></line>
-          <line x1="500" y1="320" x2="80" y2="410"></line>
-          <line x1="500" y1="320" x2="920" y2="410"></line>
-          <line x1="500" y1="320" x2="180" y2="570"></line>
-          <line x1="500" y1="320" x2="380" y2="570"></line>
-          <line x1="500" y1="320" x2="620" y2="570"></line>
-          <line x1="500" y1="320" x2="820" y2="570"></line>
-        </svg>
+      <div class="mappa-layout">
+        <aside class="legenda-mappa" aria-label="Legenda dei colori della mappa">
+          <p class="legenda-titolo">Legenda</p>
+          <div class="voce-legenda gruppo-umanistica">
+            <div>
+              <p class="nome-legenda">Umanistiche</p>
+              <p class="descrizione-legenda">Cultura, memoria e linguaggi per raccontare i cambiamenti economici.</p>
+            </div>
+          </div>
+          <div class="voce-legenda gruppo-territorio">
+            <div>
+              <p class="nome-legenda">Territorio</p>
+              <p class="descrizione-legenda">Spazio, risorse e popolazione che influenzano sviluppo e ricchezza.</p>
+            </div>
+          </div>
+          <div class="voce-legenda gruppo-scientifica">
+            <div>
+              <p class="nome-legenda">Scienze e tecnologia</p>
+              <p class="descrizione-legenda">Ricerca, scoperte e innovazioni che creano progresso.</p>
+            </div>
+          </div>
+          <div class="voce-legenda gruppo-lingue">
+            <div>
+              <p class="nome-legenda">Lingue</p>
+              <p class="descrizione-legenda">Scambi, cooperazione e rapporti economici tra Paesi.</p>
+            </div>
+          </div>
+          <div class="voce-legenda gruppo-societa">
+            <div>
+              <p class="nome-legenda">Società</p>
+              <p class="descrizione-legenda">Diritti, valori, cittadinanza, sport e vita quotidiana.</p>
+            </div>
+          </div>
+        </aside>
 
-        <div class="nodo-mappa nodo-centro">Economia</div>
-        <a class="nodo-mappa nodo-1" href="#modal-storia">Storia</a>
-        <a class="nodo-mappa nodo-2" href="#modal-geografia">Geografia</a>
-        <a class="nodo-mappa nodo-3" href="#modal-italiano">Italiano</a>
-        <a class="nodo-mappa nodo-4" href="#modal-scienze">Scienze</a>
-        <a class="nodo-mappa nodo-5" href="#modal-inglese">Inglese</a>
-        <a class="nodo-mappa nodo-6" href="#modal-spagnolo">Spagnolo</a>
-        <a class="nodo-mappa nodo-7" href="#modal-tecnologia">Tecnologia</a>
-        <a class="nodo-mappa nodo-8" href="#modal-arte">Arte</a>
-        <a class="nodo-mappa nodo-9" href="#modal-educazione-fisica">Educazione fisica</a>
-        <a class="nodo-mappa nodo-10" href="#modal-educazione-civica">Educazione civica</a>
-        <a class="nodo-mappa nodo-11" href="#modal-latino">Latino</a>
-        <a class="nodo-mappa nodo-12" href="#modal-religione">Religione</a>
+        <div class="mappa-concettuale">
+          <svg class="frecce-mappa" viewBox="0 0 1000 640" aria-hidden="true">
+            <defs>
+              <marker id="punta-freccia" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                <path d="M 0 0 L 8 4 L 0 8 z" fill="#94a3b8"></path>
+              </marker>
+            </defs>
+            <line x1="500" y1="320" x2="200" y2="70"></line>
+            <line x1="500" y1="320" x2="390" y2="70"></line>
+            <line x1="500" y1="320" x2="610" y2="70"></line>
+            <line x1="500" y1="320" x2="800" y2="70"></line>
+            <line x1="500" y1="320" x2="120" y2="230"></line>
+            <line x1="500" y1="320" x2="880" y2="230"></line>
+            <line x1="500" y1="320" x2="120" y2="410"></line>
+            <line x1="500" y1="320" x2="880" y2="410"></line>
+            <line x1="500" y1="320" x2="200" y2="570"></line>
+            <line x1="500" y1="320" x2="390" y2="570"></line>
+            <line x1="500" y1="320" x2="610" y2="570"></line>
+            <line x1="500" y1="320" x2="800" y2="570"></line>
+          </svg>
+
+          <div class="nodo-mappa nodo-centro">Economia</div>
+          <a class="nodo-mappa nodo-1 gruppo-umanistica" href="#modal-storia">Storia</a>
+          <a class="nodo-mappa nodo-2 gruppo-territorio" href="#modal-geografia">Geografia</a>
+          <a class="nodo-mappa nodo-3 gruppo-umanistica" href="#modal-italiano">Italiano</a>
+          <a class="nodo-mappa nodo-4 gruppo-scientifica" href="#modal-scienze">Scienze</a>
+          <a class="nodo-mappa nodo-5 gruppo-lingue" href="#modal-inglese">Inglese</a>
+          <a class="nodo-mappa nodo-6 gruppo-lingue" href="#modal-spagnolo">Spagnolo</a>
+          <a class="nodo-mappa nodo-7 gruppo-scientifica" href="#modal-tecnologia">Tecnologia</a>
+          <a class="nodo-mappa nodo-8 gruppo-umanistica" href="#modal-arte">Arte</a>
+          <a class="nodo-mappa nodo-9 gruppo-societa" href="#modal-educazione-fisica">Educazione fisica</a>
+          <a class="nodo-mappa nodo-10 gruppo-societa" href="#modal-educazione-civica">Educazione civica</a>
+          <a class="nodo-mappa nodo-11 gruppo-umanistica" href="#modal-latino">Latino</a>
+          <a class="nodo-mappa nodo-12 gruppo-societa" href="#modal-religione">Religione</a>
+        </div>
       </div>
       <div class="azioni-sezione">
         <a class="bottone-sezione" href="#conclusione">Vai alla conclusione</a>
