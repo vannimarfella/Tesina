@@ -1066,6 +1066,10 @@
         padding-bottom: 104px;
       }
 
+      #conclusione.sezione {
+        padding-bottom: 96px;
+      }
+
       .sezione--nav-destra,
       .sezione--nav-sinistra {
         padding-right: 18px;
@@ -1078,6 +1082,7 @@
         bottom: 22px;
         margin-top: 0;
         transform: none;
+        z-index: 10;
       }
 
       .navigazione-laterale:hover {
@@ -1134,8 +1139,9 @@
 
     @media (max-width: 620px) {
       .mappa-slide {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         align-items: stretch;
+        padding-bottom: 80px;
       }
 
       #mappa .legenda-mappa {
@@ -1148,24 +1154,24 @@
       }
 
       .mappa-slide>.navigazione-freccia {
+        position: fixed;
+        bottom: 20px;
+        z-index: 999;
         width: 54px;
         height: 54px;
-        margin-top: 12px;
+        margin: 0;
       }
 
       .mappa-slide>.navigazione-freccia:first-child {
-        order: 2;
-        justify-self: end;
+        left: 20px;
       }
 
       .mappa-slide>.mappa-layout {
         grid-column: 1 / -1;
-        order: 1;
       }
 
       .mappa-slide>.navigazione-freccia:last-child {
-        order: 3;
-        justify-self: start;
+        right: 20px;
       }
     }
 
@@ -1217,6 +1223,7 @@
 
       #mappa .mappa-slide {
         gap: 8px;
+        padding-bottom: 80px;
       }
 
       #mappa .navigazione-freccia {
