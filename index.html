@@ -679,7 +679,7 @@
     .modal-box {
       width: min(720px, 100%);
       max-height: calc(100vh - 56px);
-      padding: 34px;
+      padding: 20px 24px;
       position: relative;
       z-index: 1;
       overflow: auto;
@@ -705,7 +705,7 @@
 
     .contenuto-con-immagine {
       display: grid;
-      grid-template-columns: minmax(200px, 38%) 1fr;
+      grid-template-columns: minmax(200px, 48%) 1fr;
       gap: 6px;
       align-items: start;
     }
@@ -726,16 +726,57 @@
       grid-column: 1;
     }
 
-    .immagine-testo {
-      width: 100%;
-      max-height: none;
-      object-fit: contain;
+    .sezione-titolo {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--colore-blu-editoriale);
+      margin: 1em 0 0.15em 0;
+      padding-bottom: 0.1em;
+      border-bottom: 1px solid var(--colore-linea);
+    }
+
+    .sezione-titolo:first-of-type {
+      margin-top: 0.2em;
+    }
+
+    .grafico-modale {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 10px 0;
+      padding: 10px 14px;
+      background: #f8f7f5;
       border-radius: 4px;
       border: 1px solid var(--colore-linea);
     }
 
+    .legenda-grafico {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--colore-testo);
+    }
+
+    .legenda-grafico .cerchio {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .immagine-testo {
+      width: 100%;
+      max-height: none;
+      object-fit: contain;
+      border-radius: 2px;
+      border: 1px solid var(--colore-linea);
+    }
+
     .immagine-verticale {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 3 / 5;
     }
 
     .immagine-orizzontale {
@@ -785,12 +826,12 @@
     }
 
     .modal-box p+p {
-      margin-top: 8px;
+      margin-top: 5px;
     }
 
     .modal-box .etichetta-modal+p,
     .modal-box .etichetta-modal+.contenuto-con-immagine {
-      margin-top: 34px;
+      margin-top: 20px;
     }
 
     .riferimenti-intro {
@@ -843,8 +884,8 @@
     }
 
     .riferimenti-modale {
-      margin-top: 22px;
-      padding-top: 14px;
+      margin-top: 18px;
+      padding-top: 10px;
       border-top: 1px solid var(--colore-linea);
     }
 
@@ -1060,7 +1101,7 @@
       }
 
       .modal-box {
-        padding: 28px 22px;
+        padding: 18px 16px;
       }
 
       .contenuto-con-immagine {
@@ -1244,7 +1285,7 @@
 
       #mappa .mappa-concettuale {
         padding: 12px;
-        gap: 6px;
+      gap: 4px;
       }
 
       #mappa .navigazione-freccia {
@@ -1321,17 +1362,7 @@
         <p class="sottotitolo-tesina">Un viaggio tra storia, società, tecnologia e vita quotidiana</p>
         <div class="testo-intro">
           <p>
-            Ho scelto di incentrare la mia tesina sull'economia perché è un tema che
-            mi interessa molto e che sento vicino al mio futuro. È un argomento molto
-            attuale: tutto ciò che succede nel mondo economico influenza la nostra
-            vita quotidiana, dal lavoro ai consumi, dal risparmio alle scelte che
-            facciamo ogni giorno.
-          </p>
-          <p>
-            Studiare l'economia mi ha permesso di capire che non si tratta solo di
-            numeri o denaro, ma anche di persone, società, ambiente, diritti e
-            cambiamenti storici. Con questa mappa concettuale voglio mostrare i
-            collegamenti che ho scelto con le diverse materie.
+            Ho scelto di incentrare la mia tesina sull'economia perché è una materia che mi appassiona molto e che penso mi servirà anche in futuro. È un argomento super attuale: tutto quello che succede nel mondo dell'economia tocca da vicino la nostra vita di tutti i giorni. Studiare queste cose è stato davvero interessante e, grazie anche all'aiuto dei professori, sono riuscito a collegare le diverse materie in modo chiaro. Ora vi presento la mia mappa concettuale per mostrarvi tutti i collegamenti che ho scelto.
           </p>
         </div>
       </div>
@@ -1339,11 +1370,11 @@
         <div class="scheda-copertina scheda-copertina--sinistra">
           <div class="scheda-copertina-riga">
             <p class="scheda-copertina-etichetta">Studente</p>
-            <p class="scheda-copertina-valore">Nome Cognome</p>
+            <p class="scheda-copertina-valore">VANNI MARFELLA</p>
           </div>
           <div class="scheda-copertina-riga">
-            <p class="scheda-copertina-etichetta">Scuola</p>
-            <p class="scheda-copertina-valore">Scuola secondaria di primo grado</p>
+            <p class="scheda-copertina-etichetta">Classe</p>
+            <p class="scheda-copertina-valore">3 I</p>
           </div>
         </div>
         <div class="scheda-copertina scheda-copertina--destra">
@@ -1516,25 +1547,26 @@
       <div class="modal-box modal-box-larga" role="dialog" aria-label="Italiano - Collegamento con Economia">
         <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
         <p class="etichetta-modal">Italiano - Collegamento con Economia</p>
+
+        <p class="sezione-titolo">Pirandello e l'io individuale</p>
         <div class="contenuto-con-immagine">
-          <img class="immagine-testo immagine-verticale"
-            src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
-            alt="Libro aperto con appunti su un tavolo">
+          <img class="immagine-testo immagine-verticale" src="immagini/ita/pir.png" alt="Luigi Pirandello">
           <div>
-            <p>
-              In italiano posso collegarmi al tema del lavoro nella letteratura.
-              Per esempio, nel Verismo vengono raccontate le difficoltà delle
-              persone povere e dei lavoratori.
-            </p>
-            <p>
-              Questo mostra che l'economia non riguarda solo il denaro, ma anche
-              le condizioni di vita, le disuguaglianze e la dignità delle persone.
-            </p>
+            <p>Luigi Pirandello, nei suoi romanzi e nelle sue opere teatrali, riflette sulla crisi dell'identità dell'uomo moderno. Secondo Pirandello, ogni persona possiede un <strong>"io individuale"</strong> autentico e privato, che però viene continuamente schiacciato dalle <strong>"maschere"</strong> imposte dalla società. La società ci obbliga a recitare ruoli fissi (padre, lavoratore, cittadino) che non corrispondono mai al nostro vero io. Questa frattura tra ciò che siamo realmente e ciò che dobbiamo mostrare è la causa della sofferenza e dell'alienazione dell'individuo.</p>
           </div>
         </div>
+
+        <p class="sezione-titolo">Il collegamento con l'economia</p>
+        <div class="contenuto-con-immagine">
+          <img class="immagine-testo immagine-verticale" src="immagini/ita/mas.png" alt="Maschere teatro">
+          <div>
+            <p>Il tema dell'io individuale si lega all'economia perché il sistema economico costringe le persone a identificarsi con il proprio <strong>ruolo lavorativo</strong>. Siamo ciò che produciamo, ciò che guadagniamo, il posto che occupiamo nella gerarchia sociale. Pirandello mostra come l'uomo venga ridotto a una "forma" economica, perdendo la sua "vita" autentica. L'esempio più chiaro è il romanzo <strong><em>Il fu Mattia Pascal</em></strong>: il protagonista, stanco della sua vita opprimente, simula la propria morte e cerca di vivere libero, ma scopre che senza un'identità sociale (e quindi anche economica) non può esistere nella società. Anche in <strong><em>Uno, nessuno e centomila</em></strong> Vitangelo Moscarda scopre di essere "centomila" persone diverse per gli altri e "nessuno" per sé stesso, distrutto dalle aspettative sociali. Pirandello ci insegna che l'economia non è solo numeri e produzione, ma riguarda anche la dignità della persona e il diritto di essere sé stessi.</p>
+          </div>
+        </div>
+
         <div class="riferimenti-modale">
           <p class="riferimenti-modale-titolo">Riferimenti</p>
-          <a href="https://www.treccani.it/enciclopedia/verismo_%28Enciclopedia-dei-ragazzi%29/" target="_blank" rel="noopener noreferrer">Treccani - Verismo</a>
+          <a href="https://www.treccani.it/enciclopedia/luigi-pirandello/" target="_blank" rel="noopener noreferrer">Treccani - Luigi Pirandello</a>
         </div>
       </div>
     </div>
@@ -1617,22 +1649,34 @@
 
     <div id="modal-tecnologia" class="modal">
       <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
-      <div class="modal-box" role="dialog" aria-label="Tecnologia - Collegamento con Economia">
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Tecnologia - Collegamento con Economia">
         <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
         <p class="etichetta-modal">Tecnologia - Collegamento con Economia</p>
-        <p>
-          In tecnologia collego l'economia alla produzione industriale. Le
-          aziende trasformano materie prime in prodotti usando macchinari,
-          energia e lavoro umano.
-        </p>
-        <p>
-          Oggi la tecnologia rende la produzione più veloce, ma cambia anche
-          il mondo del lavoro e richiede nuove competenze.
-        </p>
+
+        <p class="sezione-titolo">Le origini: dal carbone al petrolio (XVIII-XX secolo)</p>
+        <p>Fino alla metà del XIX secolo, l'economia mondiale si basava su energie rinnovabili tradizionali: legna, vento, acqua e forza animale. La prima rivoluzione industriale (1760-1840) fu alimentata dal carbone, che permetteva di produrre acciaio su larga scala e di alimentare le locomotive a vapore. Il petrolio era ancora sconosciuto ai più: si utilizzava solo in piccole quantità come medicinale o per l'illuminazione (petrolio lampante). La svolta arrivò nel 1859, quando Edwin Drake perforò il primo pozzo petrolifero in Pennsylvania (USA), dando inizio all'era del petrolio. Con l'invenzione del motore a scoppio (1876) e la produzione di massa dell'automobile (Ford Model T, 1908), il petrolio divenne la fonte energetica dominante.</p>
+
+        <p class="sezione-titolo">Il Novecento: il secolo del petrolio</p>
+        <p>Nel corso del Novecento il petrolio trasformò radicalmente l'economia globale. Dopo la Seconda guerra mondiale, il suo basso costo permise il boom economico degli anni Cinquanta e Sessanta: le fabbriche producevano a ritmi mai visti, le automobili diventarono un bene di massa, nacquero la plastica, i fertilizzanti chimici e i tessuti sintetici (nylon, poliestere). L'energia a basso prezzo rese possibile la globalizzazione: le merci potevano viaggiare per migliaia di chilometri via nave, treno e aereo a costi irrisori. I paesi occidentali costruirono la loro ricchezza sul petrolio, diventandone però totalmente dipendenti. Questa dipendenza emerse con violenza negli shock petroliferi del 1973 e 1979, quando l'OPEC interruppe le forniture e il prezzo del barile quadruplicò, gettando l'Occidente nella stagflazione (stagnazione economica + inflazione).</p>
+
+        <p class="sezione-titolo">Oggi: la dipendenza nascosta del XXI secolo</p>
+        <p>Oggi il consumo globale di petrolio supera i 100 milioni di barili al giorno, ma il suo ruolo nell'economia è cambiato. Da un lato, l'intensità petrolifera del PIL si è ridotta: i paesi sviluppati consumano meno petrolio per ogni unità di ricchezza prodotta grazie all'efficienza energetica e alle rinnovabili (in Italia il rapporto idrocarburi/PIL è calato del 45% dal 1980). Dall'altro lato, il petrolio è diventato invisibile ma onnipresente: non serve più solo per i trasporti (benzina, diesel, cherosene), ma è la materia prima di plastica, fertilizzanti, farmaci, tessuti, computer e persino pannelli solari e pale eoliche. Circa il 60-80% del greggio va in carburanti, ma il 10-20% (e la percentuale sale) alimenta l'industria petrolchimica da cui dipendono migliaia di prodotti essenziali.</p>
+
+        <p class="sezione-titolo">L'evoluzione tecnologica: estrarre e raffinare sempre meglio</p>
+        <p>Le tecnologie di estrazione e raffinazione del petrolio si sono evolute enormemente. Negli anni Cinquanta si perforava solo in terraferma (onshore) con pozzi verticali. Oggi si estrae il petrolio in acque profonde oltre 3.000 metri (offshore), con piattaforme galleggianti e perforazioni direzionali che raggiungono giacimenti a chilometri di distanza dal punto di perforazione. Tecnologie come il fracking (fratturazione idraulica) hanno permesso agli Stati Uniti di estrarre petrolio e gas da rocce di scisto, trasformandoli da importatori a esportatori netti. La raffinazione si è evoluta dai semplici processi di distillazione dei primi del Novecento ai moderni cracking catalitici che permettono di ottenere prodotti sempre più specifici: dalla benzina alla nafta per la petrolchimica, dai lubrificanti ai bitumi per l'asfalto.</p>
+
+        <p class="sezione-titolo">Passato vs presente: i numeri del cambiamento</p>
+        <p>Nel 1900 il mondo consumava circa 150.000 barili di petrolio al giorno; oggi ne consuma 100 milioni, oltre 650 volte di più. Il prezzo è passato da meno di 1 dollaro al barile all'inizio del Novecento a oltre 100 dollari oggi (con punte di 146 nel 2008). La dipendenza economica, però, ha cambiato natura: negli anni Settanta uno shock petrolifero bloccava fabbriche e automobili; oggi uno shock colpisce soprattutto i bilanci delle famiglie (bollette, carburante) e la filiera petrolchimica (materie plastiche, fertilizzanti, farmaci). La differenza fondamentale è che oggi esistono alternative (rinnovabili, efficienza, elettrificazione) che negli anni Settanta non c'erano, ma la transizione è ancora lenta e la domanda globale di petrolio continua a crescere nei paesi emergenti come Cina e India.</p>
+
+        <p class="sezione-titolo">L'attualità: la crisi del 2026 e le prospettive future</p>
+        <p>Nel 2026 il conflitto tra Stati Uniti e Iran ha chiuso lo Stretto di Hormuz (da cui passa il 20% del petrolio mondiale), facendo crollare la produzione globale da 108 a 94,5 milioni di barili al giorno. Il prezzo del Brent è salito da 72 a oltre 100 dollari. La crisi ha effetti a catena su tutta l'economia: la nafta è aumentata del 60%, l'urea del 37%, l'alluminio del 25%. In Italia, Banca d'Italia prevede una crescita del PIL ferma allo 0,5% e un'inflazione al 2,9%. La lezione della storia è chiara: il petrolio è stata la fonte di energia che ha costruito la ricchezza moderna, ma la sua dipendenza geopolitica costa cara. L'evoluzione in corso punta verso le fonti rinnovabili (solare, eolico, idrogeno verde) e l'elettrificazione dei trasporti, ma il petrolio rimarrà per decenni una materia prima insostituibile per la petrolchimica e i settori hard-to-abate.</p>
+
         <div class="riferimenti-modale">
           <p class="riferimenti-modale-titolo">Riferimenti</p>
-          <a href="https://www.treccani.it/enciclopedia/produzione_%28Enciclopedia-dei-ragazzi%29/" target="_blank" rel="noopener noreferrer">Treccani - Produzione</a>
-          <a href="https://www.treccani.it/enciclopedia/tecnologia/" target="_blank" rel="noopener noreferrer">Treccani - Tecnologia</a>
+          <a href="https://www.treccani.it/enciclopedia/petrolio/" target="_blank" rel="noopener noreferrer">Treccani - Petrolio</a>
+          <a href="https://www.treccani.it/enciclopedia/storia-del-petrolio/" target="_blank" rel="noopener noreferrer">Treccani - Storia del petrolio</a>
+          <a href="https://www.iea.org/reports/oil-market-report-june-2026" target="_blank" rel="noopener noreferrer">IEA - Oil Market Report, giugno 2026</a>
+          <a href="https://www.bancaditalia.it/pubblicazioni/proiezioni-macroeconomiche/2026/Proiezioni-macroeconomiche-Italia-giugno-2026.pdf" target="_blank" rel="noopener noreferrer">Banca d'Italia - Proiezioni macroeconomiche, giugno 2026</a>
         </div>
       </div>
     </div>
@@ -1642,13 +1686,12 @@
       <div class="modal-box modal-box-larga" role="dialog" aria-label="Arte - Collegamento con Economia">
         <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
         <p class="etichetta-modal">Arte - Collegamento con Economia</p>
-        <div class="contenuto-con-immagine">
-          <img class="immagine-testo immagine-orizzontale" src="immagini/storia/tanofestapersiane.png" alt="Opera di Tano Festa">
-          <div>
-            <p>In arte ho scelto la Pop Art, un movimento nato in America e in Inghilterra, e il suo impatto sull'economia italiana. Negli anni Sessanta, l'Italia visse il suo "miracolo economico", un periodo di forte industrializzazione che trasformò il Paese in una società del benessere e dei consumi di massa. In questo clima di cambiamento arrivò dagli Stati Uniti la Pop Art, che gli artisti italiani rielaborarono legandola alla nostra tradizione culturale. Questo movimento influenzò profondamente l'economia e ne fu, al tempo stesso, lo specchio. Artisti come Mario Schifano portarono nelle loro opere i nuovi simboli del boom, come i loghi pubblicitari della Coca-Cola o della Esso, trasformando i prodotti commerciali in arte. Questa tendenza modificò radicalmente il mercato artistico, poiché le opere iniziarono a essere prodotte più rapidamente, con materiali industriali ed economici, diventando esse stesse beni di consumo accessibili a un pubblico più ampio. Si creò così un legame strettissimo tra arte e industria: se da un lato i pittori si ispiravano ai prodotti dei supermercati, dall'altro le grandi aziende italiane di moda e design iniziarono a copiare i colori accesi e lo stile della Pop Art per pubblicizzare e vendere le proprie merci, dimostrando come l'economia potesse plasmare la cultura del tempo.</p>
-            <p>Ho deciso di portare uno dei massimi esponenti della Pop Art italiana e mondiale, ovvero Tano Festa (1938-1988), figura chiave della celebre "Scuola di Piazza del Popolo" a Roma. Formatosi inizialmente come fotografo artistico, nei primi anni Sessanta avviò la sua carriera isolando oggetti quotidiani in legno, come porte, finestre e persiane, che dipingeva interamente con smalti industriali per privarli della loro funzione comune e trasformarli in veri e propri quadri-scultura. La sua intuizione più celebre e geniale arrivò però tra il 1963 e il 1964, in pieno miracolo economico: mentre gli artisti americani come Andy Warhol celebravano i prodotti dei supermercati o i divi di Hollywood, Festa capì che in Italia il vero "bene di largo consumo" e l'icona popolare per eccellenza era l'arte classica e rinascimentale, con cui i cittadini convivevano da secoli. Nacque così la sua famosissima serie "Omaggio a Michelangelo" (di cui fa parte l'opera L'Eden), in cui proiettava sulla tela le fotografie di capolavori come gli affreschi della Cappella Sistina, ridisegnandone i contorni con tinte piatte, accese e artificiali. Attraverso questo metodo innovativo, Festa dimostrò come i capolavori del passato potessero essere desacralizzati e reinterpretati come moderni manifesti pubblicitari, inserendosi perfettamente nei meccanismi visivi e commerciali della nuova società dei consumi.</p>
-          </div>
-        </div>
+        <p>In arte ho scelto la Pop Art, un movimento nato in America e in Inghilterra, e il suo impatto sull'economia italiana. Negli anni Sessanta, l'Italia visse il suo "miracolo economico", un periodo di forte industrializzazione che trasformò il Paese in una società del benessere e dei consumi di massa. In questo clima di cambiamento arrivò dagli Stati Uniti la Pop Art, che gli artisti italiani rielaborarono legandola alla nostra tradizione culturale. Questo movimento influenzò profondamente l'economia e ne fu, al tempo stesso, lo specchio. Artisti come Mario Schifano portarono nelle loro opere i nuovi simboli del boom, come i loghi pubblicitari della Coca-Cola o della Esso, trasformando i prodotti commerciali in arte. Questa tendenza modificò radicalmente il mercato artistico, poiché le opere iniziarono a essere prodotte più rapidamente, con materiali industriali ed economici, diventando esse stesse beni di consumo accessibili a un pubblico più ampio. Si creò così un legame strettissimo tra arte e industria: se da un lato i pittori si ispiravano ai prodotti dei supermercati, dall'altro le grandi aziende italiane di moda e design iniziarono a copiare i colori accesi e lo stile della Pop Art per pubblicizzare e vendere le proprie merci, dimostrando come l'economia potesse plasmare la cultura del tempo.</p>
+        <p>Ho deciso di portare uno dei massimi esponenti della Pop Art italiana e mondiale, ovvero Tano Festa (1938-1988), figura chiave della celebre "Scuola di Piazza del Popolo" a Roma. Formatosi inizialmente come fotografo artistico, nei primi anni Sessanta avviò la sua carriera isolando oggetti quotidiani in legno, come porte, finestre e persiane, che dipingeva interamente con smalti industriali per privarli della loro funzione comune e trasformarli in veri e propri quadri-scultura.</p>
+        <img class="immagine-testo immagine-orizzontale" src="immagini/arte/tano.png" alt="Opera di Tano Festa">
+        <p>La sua intuizione più celebre e geniale arrivò tra il 1963 e il 1964, in pieno miracolo economico: mentre gli artisti americani come Andy Warhol celebravano i prodotti dei supermercati o i divi di Hollywood, Festa capì che in Italia il vero "bene di largo consumo" era l'arte classica e rinascimentale, con cui i cittadini convivevano da secoli. Nacque così la sua serie "Omaggio a Michelangelo" (di cui fa parte l'opera L'Eden), in cui proiettava sulla tela le fotografie di capolavori come gli affreschi della Cappella Sistina, ridisegnandone i contorni con tinte piatte, accese e artificiali. Attraverso questo metodo, Festa dimostrò come i capolavori del passato potessero essere reinterpretati come moderni manifesti pubblicitari, inserendosi nei meccanismi visivi e commerciali della nuova società dei consumi.</p>
+        <p>Tra le sue opere più celebri ricordiamo <strong>Persiana</strong> (1963), la sua opera-icona in cui una persiana reale in legno diventa essa stessa quadro; la serie <strong>Omaggio a Michelangelo</strong> con le rivisitazioni della Cappella Sistina come <em>Creazione di Adamo</em>; <strong>La grande odalisca</strong> (citazione di Ingres); <strong>Particolare dei coniugi Arnolfini</strong> (citazione di Van Eyck); la serie <strong>Finestra n. 1</strong>; la serie <strong>Coriandoli</strong> (1980); e <strong>Monumento per un poeta morto (Finestra sul mare)</strong>.</p>
+        <img class="immagine-testo immagine-orizzontale" src="immagini/arte/per.png" alt="Persiana di Tano Festa">
         <div class="riferimenti-modale">
           <p class="riferimenti-modale-titolo">Riferimenti</p>
           <a href="https://www.tate.org.uk/art/art-terms/p/pop-art/think-you-know-pop-art" target="_blank" rel="noopener noreferrer">Tate - Pop Art</a>
@@ -1659,63 +1702,79 @@
 
     <div id="modal-educazione-fisica" class="modal">
       <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
-      <div class="modal-box" role="dialog" aria-label="Educazione fisica - Collegamento con Economia">
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Educazione fisica - Collegamento con Economia">
         <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
         <p class="etichetta-modal">Educazione fisica - Collegamento con Economia</p>
-        <p>
-          In educazione fisica posso parlare dell'economia dello sport. Gli
-          eventi sportivi muovono denaro attraverso sponsor, biglietti,
-          televisioni, turismo e vendita di prodotti.
-        </p>
-        <p>
-          Lo sport non è solo attività fisica, ma anche lavoro e organizzazione
-          economica.
-        </p>
+
+        <p class="sezione-titolo">Le Olimpiadi di Los Angeles 1932</p>
+        <p>I Giochi della X Olimpiade si svolsero a Los Angeles dal 30 luglio al 14 agosto 1932, in piena Grande Depressione. Nonostante la crisi economica globale — con il crollo di Wall Street del 1929 che aveva messo in ginocchio l'economia mondiale — Los Angeles riuscì a organizzare giochi di successo, puntando su infrastrutture già esistenti e soluzioni a basso costo. Parteciparono 37 nazioni con 1.332 atleti (solo 126 donne), numeri dimezzati rispetto al 1928 per via della crisi: molti paesi non potevano permettersi il viaggio fino in California.</p>
+
+        <p class="sezione-titolo">La creazione del primo Villaggio Olimpico</p>
+        <p>Per la prima volta nella storia delle Olimpiadi moderne, venne costruito un <strong>villaggio olimpico</strong> appositamente per ospitare gli atleti. L'idea nacque per motivi economici: il Comitato Organizzatore doveva convincere le nazioni a partecipare nonostante i costi elevati del viaggio. Garantendo vitto e alloggio a soli <strong>2 dollari al giorno per atleta</strong> (contro i 1.500 stimati dal CIO), il villaggio rese economicamente accessibile la partecipazione. Il villaggio sorgeva a Baldwin Hills su un'area di 330 acri donata temporaneamente dai proprietari. Progettato da H.O. Davis, comprendeva oltre 500 casette prefabbricate in stile "cottage", più un ufficio postale, un cinema, un ospedale, una banca, sale da pranzo e servizi igienici comuni. Era circondato da una recinzione di filo metallico alta 2,5 metri e aveva una strada sterrata principale. Le atlete donne, invece, furono alloggiate al Chapman Park Hotel, poiché all'epoca non si riteneva opportuno mescolare i sessi nel villaggio.</p>
+
+        <p class="sezione-titolo">Impatto economico e innovazione</p>
+        <p>Il villaggio olimpico rappresentò un'innovazione economica e organizzativa destinata a diventare uno standard per tutte le Olimpiadi future. Dopo la cerimonia di chiusura, tutte le strutture vennero smantellate e il terreno restituito ai proprietari, come da accordo. I Giochi del 1932 lasciarono in eredità strutture come il <strong>Memorial Coliseum</strong> (ancora in uso e riconfermato per i Giochi del 2028) e il <strong>Rose Bowl</strong>, dimostrando come un evento sportivo possa generare infrastrutture durature e sviluppo economico per il territorio. L'idea del villaggio olimpico — nata per risparmiare denaro — divenne il simbolo dell'unità e della fraternità tra i popoli, realizzando l'ideale di De Coubertin di "riunire la gioventù del mondo in una comunità".</p>
+
         <div class="riferimenti-modale">
           <p class="riferimenti-modale-titolo">Riferimenti</p>
-          <a href="https://www.treccani.it/enciclopedia/l-economia-dello-sport-nella-societa-moderna_%28Enciclopedia-dello-Sport%29/" target="_blank" rel="noopener noreferrer">Treccani - Economia dello sport</a>
-          <a href="https://www.wipo.int/en/web/wipo-magazine/articles/sport-and-broadcasting-rights-adding-value-38430" target="_blank" rel="noopener noreferrer">WIPO - Diritti sportivi e valore economico</a>
+          <a href="https://www.treccani.it/enciclopedia/olimpiadi-estive-los-angeles-1932_(Enciclopedia-dello-Sport)/" target="_blank" rel="noopener noreferrer">Treccani - Los Angeles 1932</a>
+          <a href="https://stillmed.olympic.org/Documents/Reports/Official%20Past%20Games%20Reports/Summer/1932/ENG/1932-RO-S-Los%20Angeles_III.pdf" target="_blank" rel="noopener noreferrer">Official Report - Los Angeles 1932</a>
+          <a href="https://www.pbssocal.org/shows/lost-la/the-olympic-village-in-los-angeles" target="_blank" rel="noopener noreferrer">PBS - The First Olympic Village</a>
         </div>
       </div>
     </div>
 
     <div id="modal-educazione-civica" class="modal">
       <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
-      <div class="modal-box" role="dialog" aria-label="Educazione civica - Collegamento con Economia">
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Educazione civica - Collegamento con Economia">
         <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
         <p class="etichetta-modal">Educazione civica - Collegamento con Economia</p>
-        <p>
-          In educazione civica l'economia si collega al lavoro, alle tasse e ai
-          diritti dei cittadini. La Costituzione italiana riconosce il lavoro
-          come un valore fondamentale.
-        </p>
-        <p>
-          Pagare le tasse serve anche a finanziare servizi pubblici come scuola,
-          sanità, trasporti e sicurezza.
-        </p>
+
+        <p class="sezione-titolo">L'educazione finanziaria</p>
+        <p>L'educazione finanziaria insegna a gestire consapevolmente il proprio denaro, una competenza fondamentale per la vita di tutti i giorni. Il primo passo è il <strong>bilancio familiare</strong>: tenere traccia di entrate (stipendi, pensioni) e uscite (affitto, bollette, cibo, trasporti, svago) per capire dove va il denaro e individuare eventuali sprechi. La <strong>regola 50-30-20</strong> aiuta a dividere le entrate in modo equilibrato: 50% per le spese necessarie (casa, bollette, alimentari), 30% per i desideri personali (viaggi, hobby, ristoranti) e 20% per il risparmio e la riduzione dei debiti.</p>
+        <div class="grafico-modale">
+          <svg viewBox="0 0 220 220" style="max-width:180px;height:auto;">
+            <circle cx="110" cy="110" r="100" fill="none" stroke="#e0ddd8" stroke-width="34"/>
+            <circle cx="110" cy="110" r="100" fill="none" stroke="#2c6b9e" stroke-width="34" stroke-dasharray="314 314" stroke-dashoffset="0" transform="rotate(-90 110 110)"/>
+            <circle cx="110" cy="110" r="100" fill="none" stroke="#4a9e5c" stroke-width="34" stroke-dasharray="188 628" stroke-dashoffset="-314" transform="rotate(-90 110 110)"/>
+            <circle cx="110" cy="110" r="100" fill="none" stroke="#d4a23a" stroke-width="34" stroke-dasharray="126 754" stroke-dashoffset="-502" transform="rotate(-90 110 110)"/>
+            <text x="110" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#2c2a28">50-30-20</text>
+            <text x="110" y="122" text-anchor="middle" font-size="9" fill="#5f554d">Bilancio</text>
+          </svg>
+          <div class="legenda-grafico">
+            <span><span class="cerchio" style="background:#2c6b9e;"></span> 50% Spese necessarie</span>
+            <span><span class="cerchio" style="background:#4a9e5c;"></span> 30% Desideri personali</span>
+            <span><span class="cerchio" style="background:#d4a23a;"></span> 20% Risparmio e debiti</span>
+          </div>
+        </div>
+        <p><strong>Risparmiare</strong> è importante per affrontare imprevisti (riparazioni dell'auto, spese mediche, perdita del lavoro) e realizzare progetti futuri (studi, vacanze, casa). L'ideale è accantonare almeno 3-6 mesi di spese come fondo di emergenza. Il <strong>credito</strong> (prestiti, mutui, finanziamenti) è uno strumento utile per acquisti importanti come una casa o un'auto, ma va usato con cautela: la rata mensile non dovrebbe superare il 30% del reddito e bisogna sempre confrontare il costo totale del finanziamento tra diverse offerte.</p>
+        <p>Esistono vari <strong>strumenti di pagamento</strong>: il contante è anonimo ma non protegge da furto o smarrimento; la carta di credito permette di pagare a rate ma ha interessi alti se non si salda l'estratto conto in tempo; la carta di debito preleva subito dal conto, evitando debiti, ma offre meno tutele in caso di frode. Conoscere queste basi aiuta a evitare truffe, indebitamento eccessivo e a pianificare con serenità il proprio futuro economico.</p>
+
         <div class="riferimenti-modale">
           <p class="riferimenti-modale-titolo">Riferimenti</p>
-          <a href="https://www.senato.it/istituzione/la-costituzione/principi-fondamentali/articolo-1" target="_blank" rel="noopener noreferrer">Senato - Articolo 1</a>
-          <a href="https://www.senato.it/node/150/printable/print" target="_blank" rel="noopener noreferrer">Senato - Articolo 53</a>
+          <a href="https://economiapertutti.bancaditalia.it/" target="_blank" rel="noopener noreferrer">Banca d'Italia - L'economia per tutti</a>
         </div>
       </div>
     </div>
 
     <div id="modal-latino" class="modal">
       <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
-      <div class="modal-box" role="dialog" aria-label="Latino - Collegamento con Economia">
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Latino - Collegamento con Economia">
         <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
         <p class="etichetta-modal">Latino - Collegamento con Economia</p>
-        <p>
-          In latino posso collegare l'economia alla società romana. Nell'antica
-          Roma erano importanti il commercio, le monete, le strade e i mercati.
-        </p>
-        <p>
-          Le strade romane aiutavano gli scambi economici e permettevano di
-          collegare città e territori dell'Impero.
-        </p>
+
+        <p class="sezione-titolo">La società romana e l'economia</p>
+        <p>La società romana era rigidamente gerarchica e l'economia era il riflesso di questa struttura. Al vertice c'erano i <strong>patrizi</strong>, grandi proprietari terrieri che controllavano la maggior parte delle terre e delle risorse. Seguivano i <strong>plebei</strong>, divisi tra ricchi commercianti e artigiani (che cercavano diritti politici) e poveri contadini senza terra (che chiedevano sussidi e distribuzioni di grano). Alla base c'erano gli <strong>schiavi</strong>, considerati proprietà, privi di diritti e impiegati in agricoltura, miniere, artigianato e servizi domestici. I <strong>liberti</strong> (schiavi liberati) potevano arricchirsi e fare carriera, specialmente nella burocrazia imperiale.</p>
+
+        <p class="sezione-titolo">Agricoltura, latifondo e schiavitù</p>
+        <p>L'economia romana era prevalentemente agricola. In età repubblicana prevaleva la piccola proprietà contadina (policoltura per autoconsumo), ma con le guerre di conquista e il servizio militare prolungato i piccoli proprietari furono costretti a vendere i poderi. Nacquero così i <strong>latifondi</strong>, enormi tenute dei patrizi dove si coltivava un unico prodotto su larga scala (vite, olivo, cereali) usando manodopera servile a costo zero. Questo sistema era altamente redditizio per i proprietari, ma distrusse la classe dei piccoli contadini e creò forti disuguaglianze sociali. Nelle <strong>villae rusticae</strong> si organizzava la produzione con schiavi, lavoratori stagionali e coloni (affittuari che pagavano in natura).</p>
+
+        <p class="sezione-titolo">Commercio, monete e infrastrutture</p>
+        <p>Con l'espansione territoriale, il <strong>commercio</strong> divenne fondamentale. Roma coniò il <strong>denarius</strong> (moneta d'argento) che facilitò gli scambi in tutto il Mediterraneo. Le <strong>strade romane</strong> (via Appia, via Flaminia, via Aurelia) erano infrastrutture economiche essenziali: costruite per spostare l'esercito, servivano anche al trasporto di merci, collegando città, porti e mercati. I porti di Ostia e Puteoli erano snodi commerciali dove arrivavano spezie, tessuti, metalli e prodotti esotici da Africa, Asia ed Europa. Durante l'Impero (II secolo d.C., il "secolo d'oro"), la <em>pax romana</em> garantì stabilità e sviluppo economico, con grandi opere pubbliche (acquedotti, fori, terme, anfiteatri) finanziate dalle tasse e dai tributi delle province.</p>
+
         <div class="riferimenti-modale">
           <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.treccani.it/enciclopedia/roma-antica-economia/" target="_blank" rel="noopener noreferrer">Treccani - Economia romana</a>
           <a href="https://www.britannica.com/place/Roman-Empire" target="_blank" rel="noopener noreferrer">Britannica - Roman Empire</a>
         </div>
       </div>
@@ -1723,20 +1782,22 @@
 
     <div id="modal-religione" class="modal">
       <a class="modal-sfondo" href="#mappa" aria-label="Chiudi modale"></a>
-      <div class="modal-box" role="dialog" aria-label="Religione - Collegamento con Economia">
+      <div class="modal-box modal-box-larga" role="dialog" aria-label="Religione - Collegamento con Economia">
         <a class="chiudi-modal" href="#mappa" aria-label="Chiudi">&times;</a>
         <p class="etichetta-modal">Religione - Collegamento con Economia</p>
-        <p>
-          In religione posso collegare l'economia al tema della giustizia
-          sociale. Molte religioni invitano ad aiutare chi ha meno e a non
-          mettere il denaro al centro di tutto.
-        </p>
-        <p>
-          Questo collegamento aiuta a riflettere su povertà, solidarietà,
-          lavoro dignitoso e uso responsabile delle ricchezze.
-        </p>
+
+        <p class="sezione-titolo">L'enciclica "Quadragesimo Anno" di Pio XI</p>
+        <p>Il 15 maggio 1931 papa Pio XI pubblicò l'enciclica <strong>"Quadragesimo Anno"</strong> (espressione latina che significa "nel quarantesimo anno"), scritta in occasione del quarantesimo anniversario della <em>Rerum Novarum</em> di Leone XIII, la prima grande enciclica sociale della Chiesa. Il titolo completo è <em>"Sulla ricostruzione dell'ordine sociale"</em>. Fu fortemente ispirata dalla crisi economica mondiale successiva al crollo di Wall Street del 1929. L'enciclica rappresenta il secondo pilastro della dottrina sociale della Chiesa cattolica e affronta il rapporto tra economia, giustizia e dignità umana.</p>
+
+        <p class="sezione-titolo">I principi economici della Quadragesimo Anno</p>
+        <p>Pio XI condanna sia il <strong>capitalismo sfrenato</strong> (la "concentrazione di ricchezze e di potenza" nelle mani di pochi) sia il <strong>comunismo totalitario</strong>, definito "empio" per la sua negazione della religione. L'enciclica introduce due principi fondamentali che diventeranno cardini della dottrina sociale cattolica: il <strong>principio di sussidiarietà</strong> (lo Stato non deve sostituirsi alle iniziative dei corpi intermedi, ma sostenerle) e il <strong>principio di solidarietà</strong> (i beni sono destinati a tutti e l'economia deve servire l'uomo, non il profitto). Sul piano economico, Pio XI afferma che la libera concorrenza va regolata entro "ragionevoli e giusti limiti", che i salari devono essere giusti e sufficienti per il sostentamento del lavoratore e della sua famiglia, e che la proprietà privata ha una funzione sociale.</p>
+
+        <p class="sezione-titolo">Il collegamento con l'economia oggi</p>
+        <p>La <em>Quadragesimo Anno</em> è ancora oggi citata nei documenti della Chiesa e ha influenzato tutte le encicliche sociali successive: la <em>Mater et Magistra</em> (1961) di Giovanni XXIII, la <em>Populorum Progressio</em> (1967) di Paolo VI, la <em>Laborem Exercens</em> (1981) di Giovanni Paolo II, la <em>Centesimus Annus</em> (1991) e la <em>Laudato Si'</em> (2015) di Francesco. Il suo messaggio centrale — che l'economia deve essere al servizio della persona umana e del bene comune, e non viceversa — è oggi più attuale che mai, in un mondo segnato da disuguaglianze crescenti, crisi climatiche e conflitti legati alle risorse energetiche.</p>
+
         <div class="riferimenti-modale">
           <p class="riferimenti-modale-titolo">Riferimenti</p>
+          <a href="https://www.vatican.va/content/pius-xi/it/encyclicals/documents/hf_p-xi_enc_19310515_quadragesimo-anno.html" target="_blank" rel="noopener noreferrer">Vaticano - Quadragesimo Anno (testo integrale)</a>
           <a href="https://www.vatican.va/roman_curia/pontifical_councils/justpeace/documents/rc_pc_justpeace_doc_20060526_compendio-dott-soc_it.html" target="_blank" rel="noopener noreferrer">Vaticano - Dottrina sociale della Chiesa</a>
         </div>
       </div>
