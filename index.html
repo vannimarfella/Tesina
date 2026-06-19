@@ -87,6 +87,16 @@
       justify-content: safe center;
     }
 
+    .qr-code {
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      width: 100px;
+      height: 100px;
+      border-radius: 6px;
+      z-index: 5;
+    }
+
     @supports (height: 100dvh) {
       html,
       body,
@@ -1103,6 +1113,10 @@
         transform: scale(1.16);
       }
 
+      .qr-code {
+        display: none;
+      }
+
       .copertina-intro {
         max-width: 100%;
         text-align: left;
@@ -1301,6 +1315,7 @@
 
   <main>
     <section id="introduzione" class="sezione sezione--nav-destra">
+      <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://vannimarfella.github.io/Tesina/" alt="QR Code per aprire la tesina sul telefono" width="120" height="120">
       <div class="copertina-intro">
         <h1 class="titolo-tesina">L'economia</h1>
         <p class="sottotitolo-tesina">Un viaggio tra storia, società, tecnologia e vita quotidiana</p>
