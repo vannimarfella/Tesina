@@ -76,12 +76,28 @@
       margin: 0;
       padding: 32px max(20px, calc((100vw - 1100px) / 2 + 20px));
       position: relative;
+      overflow-x: hidden;
       overflow-y: auto;
       overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
       display: flex;
       flex-direction: column;
       justify-content: center;
       justify-content: safe center;
+    }
+
+    @supports (height: 100dvh) {
+      html,
+      body,
+      main,
+      .sezione {
+        height: 100dvh;
+      }
+
+      .sezione {
+        min-height: 100dvh;
+      }
     }
 
     .sezione--nav-destra {
@@ -1135,16 +1151,24 @@
 
     @media (max-width: 620px) {
       #mappa.sezione {
-        padding-bottom: 96px;
+        padding-bottom: calc(24px + env(safe-area-inset-bottom));
+        align-items: stretch;
       }
 
       .mappa-slide {
-        flex: 1;
-        min-height: 0;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr auto;
+        grid-template-rows: auto auto;
         gap: 8px;
+      }
+
+      #mappa h2 {
+        max-width: 100%;
+        font-size: clamp(23px, 8vw, 30px);
+        overflow-wrap: anywhere;
       }
 
       #mappa .legenda-mappa {
@@ -1157,12 +1181,13 @@
       }
 
       .mappa-slide>.mappa-layout {
+        width: 100%;
+        max-width: 100%;
         grid-column: 1 / -1;
         grid-row: 1;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
         min-height: 0;
-        height: 100%;
+        height: auto;
+        overflow: visible;
       }
 
       #mappa .mappa-concettuale {
@@ -1172,6 +1197,9 @@
       .mappa-slide>.navigazione-freccia {
         width: 54px;
         height: 54px;
+        position: sticky;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        z-index: 8;
         justify-self: center;
       }
 
@@ -1234,7 +1262,6 @@
 
       #mappa .mappa-slide {
         gap: 8px;
-        padding-bottom: 80px;
       }
 
       #mappa .navigazione-freccia {
